@@ -1,0 +1,52 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white custom shadow-sm vh-100" style="width: 280px;">
+  
+  <!-- Logo -->
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none px-2">
+     <img src="https://i.postimg.cc/9fJnRYzJ/logo-1.png" alt="Logo" class="logo">
+    <span class="fs-4 fw-bold"></span>
+  </a>
+  
+  <hr>
+
+  <!-- Menú de Navegación -->
+  <ul class="nav nav-pills flex-column mb-auto gap-2">
+    <li class="nav-item">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link text-white d-flex align-items-center" aria-current="page">
+        <i class="fa-solid fa-house me-3"></i> Dashboard
+      </a>
+    </li>
+    <li>
+      <a routerLink="/reportes" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+        <i class="fa-solid fa-handshake me-3"></i> Reportes
+      </a>
+    </li>
+    <li>
+      <a routerLink="/comunidad" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+        <i class="fa-solid fa-users me-3"></i> Comunidad
+      </a>
+    </li>
+    <li>
+      <a routerLink="/seguimiento" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+        <i class="fas fa-clipboard-list me-4"></i> Seguimiento
+      </a>
+    </li>
+    <li>
+      <a routerLink="/perfil" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+        <i class="fa-solid fa-circle-user me-4"></i> Mi Perfil
+      </a>
+    </li>
+  </ul>
+
+  <hr>
+
+  <!-- Sección inferior de usuario -->
+  <div class="dropdown">
+    <a href="#" class="d-flex align-items-center justify-content-between text-white text-decoration-none" id="dropdownUser1">
+    <div class="d-flex align-items-center">
+      <span>Cerrar Sesión</span>
+    </div>
+    <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+  </div>
+
+</div>

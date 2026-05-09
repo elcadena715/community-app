@@ -1,0 +1,21 @@
+.custom{
+  background-color: var(--primary-color);
+}
+
+.nav-link {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    background-color: var(--secondary-color);
+  }
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: var(--secondary-color); 
+  color: var(--primary-color);
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
