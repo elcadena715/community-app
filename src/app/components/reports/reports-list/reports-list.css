@@ -1,0 +1,5 @@
+button.btn:active,
+button.btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}

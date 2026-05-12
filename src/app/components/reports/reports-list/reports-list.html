@@ -1,0 +1,28 @@
+<div class="container-fluid mt-4">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <h2 class="text-black fw-bold">Reportes</h2>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn fw-bold border border-dark rounded" (click)="nuevoReporte()">+ Nuevo Reporte</button>
+    </div>
+  </div>
+
+  <h4 class="text-black mb-3">Mis Reportes</h4>
+
+  <app-table-reporte-crud
+    [data]="reportes()"
+    [columnas]="[
+      { key: 'tipoReporte', label: 'Tipo de Reporte' },
+      { key: 'titulo', label: 'Titulo' },
+      { key: 'fecha', label: 'Fecha' },
+      { key: 'hora', label: 'Hora' },
+      { key: 'ubicacion', label: 'Ubicacion' },
+      { key: 'evidencia', label: 'Evidencia' },
+      { key: 'estado', label: 'Estado' }
+    ]"
+    (editar)="editarReporte($event)"
+    (eliminar)="eliminarReporte($event)">
+  </app-table-reporte-crud>
+</div>

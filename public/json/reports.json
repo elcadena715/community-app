@@ -1,0 +1,24 @@
+{
+  "reportes": [
+    {
+      "id": 1,
+      "tipoReporte": "Bache",
+      "titulo": "Hueco enorme en la vía",
+      "fecha": "2026-05-11",
+      "hora": "08:30",
+      "ubicacion": "Av. Principal y Calle 4",
+      "evidencia": "foto_bache.jpg",
+      "estado": "Pendiente"
+    },
+    {
+      "id": 2,
+      "tipoReporte": "Alumbrado",
+      "titulo": "Poste caído sin luz",
+      "fecha": "2026-05-10",
+      "hora": "19:00",
+      "ubicacion": "Parque Central",
+      "evidencia": "poste.jpg",
+      "estado": "En Revisión"
+    }
+  ]
+}

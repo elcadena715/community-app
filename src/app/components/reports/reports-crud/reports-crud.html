@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <div class="card border-danger shadow-sm">
+    <div class="card-header bg-danger text-white">
+      <h4 class="mb-0">{{ editingId ? 'Editar Reporte' : 'Nuevo Reporte' }}</h4>
+    </div>
+    
+    <div class="card-body p-4">
+      <form [formGroup]="formReporte" (submit)="save()">
+        
+        <div class="mb-3">
+          <label class="form-label text-danger">Tipo de Reporte</label>
+          <select class="form-select border-danger" formControlName="tipoReporte">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let t of tipos" [value]="t">{{ t }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-danger">Título</label>
+          <input type="text" class="form-control border-danger" formControlName="titulo">
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label text-danger">Fecha</label>
+            <input type="date" class="form-control border-danger" formControlName="fecha">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label text-danger">Hora</label>
+            <input type="time" class="form-control border-danger" formControlName="hora">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-danger">Ubicación</label>
+          <input type="text" class="form-control border-danger" formControlName="ubicacion">
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Guardar Reporte</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
