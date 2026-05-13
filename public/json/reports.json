@@ -1,7 +1,7 @@
 {
   "reportes": [
     {
-      "id": 1,
+      "id": "1",
       "tipoReporte": "Bache",
       "titulo": "Hueco enorme en la vía",
       "fecha": "2026-05-11",
@@ -11,14 +11,15 @@
       "estado": "Pendiente"
     },
     {
-      "id": 2,
-      "tipoReporte": "Alumbrado",
-      "titulo": "Poste caído sin luz",
-      "fecha": "2026-05-10",
-      "hora": "19:00",
-      "ubicacion": "Parque Central",
-      "evidencia": "poste.jpg",
-      "estado": "En Revisión"
+      "tipoReporte": "Ruido",
+      "titulo": "Ruido extremo",
+      "fecha": "2026-05-14",
+      "hora": "02:56",
+      "ubicacion": "Canchas de futbol",
+      "evidencia": null,
+      "estado": "Pendiente",
+      "id": "tfTeK9mqHuY"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

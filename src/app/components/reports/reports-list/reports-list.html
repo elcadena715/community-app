@@ -1,15 +1,17 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 px-4">
   <div class="row align-items-center mb-4">
     <div class="col-md-4"></div>
     <div class="col-md-4 text-center">
-      <h2 class="text-black fw-bold">Reportes</h2>
+      <h2 class="fw-bold m-0">Incidentes</h2>
     </div>
     <div class="col-md-4 text-end">
-      <button class="btn fw-bold border border-dark rounded" (click)="nuevoReporte()">+ Nuevo Reporte</button>
+      <button class="btn btn-new btn-outline-dark fw-bold" (click)="openNew()">
+        + Nuevo Incidente
+      </button>
     </div>
   </div>
 
-  <h4 class="text-black mb-3">Mis Reportes</h4>
+  <h4 class="mb-3">Mis Incidentes</h4>
 
   <app-table-reporte-crud
     [data]="reportes()"
@@ -22,7 +24,83 @@
       { key: 'evidencia', label: 'Evidencia' },
       { key: 'estado', label: 'Estado' }
     ]"
-    (editar)="editarReporte($event)"
-    (eliminar)="eliminarReporte($event)">
+    (editar)="openEdit($event)"
+    (eliminar)="delete($event)">
   </app-table-reporte-crud>
 </div>
+
+<div class="modal fade" 
+     [class.show]="isModalOpen()" 
+     [style.display]="isModalOpen() ? 'block' : 'none'" 
+     tabindex="-1">
+     
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      
+      <div class="d-flex justify-content-between align-items-center p-4 pb-2">
+        <h4 class="fw-bold m-0 text-dark">{{ editingId ? 'Editar Reporte' : 'Nuevo Reporte' }}</h4>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body px-4 pb-4">
+        <form [formGroup]="formReporte" (submit)="save()">
+          
+          <div class="mb-4">
+            <label class="form-label text-dark fw-medium">¿Qué está pasando?</label>
+            <div class="row g-2">
+              @for (cat of categorias; track cat) {
+                <div class="col-6">
+                  <input type="radio" class="btn-check" [id]="cat" [value]="cat" formControlName="tipoReporte">
+                  <label class="btn btn-outline-custom w-100 rounded-3 py-2 text-dark" [for]="cat">
+                    {{ cat }}
+                  </label>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">Titulo del reporte:</label>
+            <input type="text" class="form-control custom-input" formControlName="titulo">
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-6">
+              <label class="form-label text-dark fw-medium">Fecha:</label>
+              <input type="date" class="form-control custom-input" formControlName="fecha">
+            </div>
+            <div class="col-6">
+              <label class="form-label text-dark fw-medium">Hora:</label>
+              <input type="time" class="form-control custom-input" formControlName="hora">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">Evidencia</label>
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-dashed py-2 text-dark fw-medium">
+                <i class="fa-solid fa-video me-2"></i> Subir Video
+              </button>
+              <button type="button" class="btn btn-dashed py-2 text-dark fw-medium">
+                <i class="fa-solid fa-camera me-2"></i> Subir Foto
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-dark fw-medium">Ubicación</label>
+            <input type="text" class="form-control custom-input" formControlName="ubicacion">
+          </div>
+
+          <button type="submit" class="btn btn-send w-100 rounded-3 py-3 text-white fw-bold shadow-sm">
+            Enviar Reporte
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if(isModalOpen()) {
+  <div class="modal-backdrop fade show"></div>
+}

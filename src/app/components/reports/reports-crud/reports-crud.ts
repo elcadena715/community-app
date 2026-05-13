@@ -1,26 +1,30 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { Reporte } from '../../../models/reports';
-import { ServReportesJson } from '../../../services/serv-reports-json';
+import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Reporte } from '../../../models/reports';
+import { ServReportesJson } from '../../../services/serv-reports-json';
+
+declare const bootstrap: any; 
 
 @Component({
   selector: 'app-reporte-crud',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './reports-crud.html'
+  templateUrl: './reports-crud.html',
+  styleUrls: ['./reports-crud.css']
 })
 export class ReporteCrud implements OnInit {
   formReporte!: FormGroup;
   editingId: number | null = null;
+  categorias = ['Ruido', 'Mascota', 'Parqueo', 'Otros'];
   
-  tipos = ['Bache', 'Alumbrado', 'Basura', 'Vandalismo'];
+  @ViewChild('modalElement') modalElement!: ElementRef;
+  modalInstance: any;
+
+  @Output() recargar = new EventEmitter<void>();
   
   private fb = inject(FormBuilder);
   private miServicio = inject(ServReportesJson);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.formReporte = this.fb.group({
@@ -32,13 +36,26 @@ export class ReporteCrud implements OnInit {
       evidencia: [''],
       estado: ['Pendiente']
     });
+  }
 
-    // Detectar si venimos a editar o a crear
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.editingId = Number(id);
-      this.miServicio.getReporteById(id).subscribe(data => this.formReporte.patchValue(data));
-    }
+  ngAfterViewInit(): void {
+    this.modalInstance = new bootstrap.Modal(this.modalElement.nativeElement);
+  }
+
+  openNew(): void {
+    this.editingId = null;
+    this.formReporte.reset({ estado: 'Pendiente' });
+    this.modalInstance.show();
+  }
+
+  openEdit(reporte: Reporte): void {
+    this.editingId = reporte.id!;
+    this.formReporte.patchValue(reporte);
+    this.modalInstance.show();
+  }
+
+  cerrarModal(): void {
+    this.modalInstance.hide();
   }
 
   save(): void {
@@ -49,13 +66,15 @@ export class ReporteCrud implements OnInit {
 
     const data = this.formReporte.value;
     if (this.editingId) {
-      this.miServicio.updateReporte({ ...data, id: this.editingId }).subscribe(() => this.router.navigate(['/reporte-list']));
+      this.miServicio.updateReporte({ ...data, id: this.editingId }).subscribe(() => {
+        this.recargar.emit(); // Avisamos que recargue la tabla
+        this.cerrarModal();
+      });
     } else {
-      this.miServicio.addReporte(data).subscribe(() => this.router.navigate(['/reporte-list']));
+      this.miServicio.addReporte(data).subscribe(() => {
+        this.recargar.emit(); // Avisamos que recargue la tabla
+        this.cerrarModal();
+      });
     }
-  }
-
-  cancel(): void {
-    this.router.navigate(['/reporte-list']);
   }
 }
