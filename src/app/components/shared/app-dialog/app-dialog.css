@@ -1,0 +1,32 @@
+.custom-modal-radius {
+    border-radius: 20px;
+    background-color: var(--white-color);
+}
+
+.text-primary-custom { color: var(--primary-color); }
+.text-grey-custom { color: var(--grey-color); }
+.custom-border { border-color: var(--border-color) !important; }
+
+.report-card {
+    background-color: #f8f9fa; 
+    border: 2px dashed var(--border-color);
+}
+
+.label-width {
+    width: 80px;
+    display: inline-block;
+}
+
+.btn-secondary-custom {
+    background-color: var(--secondary-color);
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #8f7230;
+}
+
+.modal.show {
+    opacity: 1;
+}

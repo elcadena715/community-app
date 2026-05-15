@@ -17,7 +17,7 @@
     [data]="reportes()"
     [columnas]="[
       { key: 'tipoReporte', label: 'Tipo de Reporte' },
-      { key: 'titulo', label: 'Titulo' },
+      { key: 'titulo', label: 'Detalle del Incidente' },
       { key: 'fecha', label: 'Fecha' },
       { key: 'hora', label: 'Hora' },
       { key: 'ubicacion', label: 'Ubicacion' },
@@ -57,43 +57,87 @@
                 </div>
               }
             </div>
+            @if(formReporte.get('tipoReporte')?.touched && formReporte.get('tipoReporte')?.invalid) {
+              @if(formReporte.get('tipoReporte')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Por favor, selecciona una categoría antes de continuar</div> 
+              }
+            }
           </div>
 
           <div class="mb-3">
-            <label class="form-label text-dark fw-medium">Titulo del reporte:</label>
+            <label class="form-label text-dark fw-medium">Detalle del Reporte:</label>
             <input type="text" class="form-control custom-input" formControlName="titulo">
+            @if(formReporte.get('titulo')?.touched && formReporte.get('titulo')?.invalid) {
+              
+              @if(formReporte.get('titulo')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Por favor, ingresa un detalle</div> 
+              }
+              @if(formReporte.get('titulo')?.errors?.['minlength']) {
+                <div class="text-danger small mt-1">El detalle debe tener al menos 5 caracteres</div> 
+              }
+              @if(formReporte.get('titulo')?.errors?.['maxlength']) {
+                <div class="text-danger small mt-1">El detalle no puede superar los 70 caracteres</div> 
+              }
+            }
           </div>
 
           <div class="row mb-3">
             <div class="col-6">
               <label class="form-label text-dark fw-medium">Fecha:</label>
               <input type="date" class="form-control custom-input" formControlName="fecha">
+              @if(formReporte.get('fecha')?.touched && formReporte.get('fecha')?.invalid) {
+                @if(formReporte.get('fecha')?.errors?.['required']) {
+                  <div class="text-danger small mt-1">Por favor, ingresa una fecha</div> 
+                }
+              }
             </div>
             <div class="col-6">
               <label class="form-label text-dark fw-medium">Hora:</label>
               <input type="time" class="form-control custom-input" formControlName="hora">
+              @if(formReporte.get('hora')?.touched && formReporte.get('hora')?.invalid) {
+                @if(formReporte.get('hora')?.errors?.['required']) {
+                  <div class="text-danger small mt-1">Por favor, ingresa una hora</div> 
+                }
+              }
             </div>
           </div>
 
           <div class="mb-3">
             <label class="form-label text-dark fw-medium">Evidencia</label>
             <div class="d-grid gap-2">
+              <input type="file" #fotoInput style="display: none;" accept="image/*" (change)="onFileSelected($event)">
               <button type="button" class="btn btn-dashed py-2 text-dark fw-medium">
                 <i class="fa-solid fa-video me-2"></i> Subir Video
               </button>
-              <button type="button" class="btn btn-dashed py-2 text-dark fw-medium">
+              <button type="button" class="btn btn-dashed py-2 text-dark fw-medium" (click)="fotoInput.click()">
                 <i class="fa-solid fa-camera me-2"></i> Subir Foto
               </button>
             </div>
+            @if(fotoSeleccionada()) {
+              <div class="mt-3 position-relative" style="width: fit-content;">
+                <img [src]="fotoSeleccionada()" alt="Evidencia" class="rounded border shadow-sm" style="width: 100px; height: 100px; object-fit: cover;">
+                <button type="button" 
+                        class="btn btn-danger btn-sm position-absolute top-0 start-100 translate-middle rounded-circle shadow"
+                        style="width: 25px; height: 25px; padding: 0; line-height: 1;"
+                        (click)="removerFoto()">
+                  &times;
+                </button>
+              </div>
+            }
           </div>
 
           <div class="mb-4">
             <label class="form-label text-dark fw-medium">Ubicación</label>
             <input type="text" class="form-control custom-input" formControlName="ubicacion">
+            @if(formReporte.get('ubicacion')?.touched && formReporte.get('ubicacion')?.invalid) {
+              @if(formReporte.get('ubicacion')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Por favor, ingresa la ubicación exacta del incidente</div> 
+              }
+            }
           </div>
 
-          <button type="submit" class="btn btn-send w-100 rounded-3 py-3 text-white fw-bold shadow-sm">
-            Enviar Reporte
+          <button type="button" class="btn btn-send w-100 rounded-3 py-3 text-white fw-bold shadow-sm" (click)="save()">
+            {{ editingId ? 'Actualizar Reporte' : 'Enviar Reporte' }}
           </button>
         </form>
       </div>
@@ -101,6 +145,13 @@
   </div>
 </div>
 
-@if(isModalOpen()) {
+<app-dialog
+  [isOpen]="isSuccessModalOpen()" 
+  [config]="exitoConfig()" 
+  (onClose)="cerrarModalExito()"
+  (onConfirm)="confirmarAccionDialog()">
+</app-dialog>
+
+@if(isModalOpen() || isSuccessModalOpen()) {
   <div class="modal-backdrop fade show"></div>
 }

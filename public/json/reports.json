@@ -1,24 +1,64 @@
 {
   "reportes": [
     {
-      "id": "1",
-      "tipoReporte": "Bache",
-      "titulo": "Hueco enorme en la vía",
-      "fecha": "2026-05-11",
-      "hora": "08:30",
-      "ubicacion": "Av. Principal y Calle 4",
-      "evidencia": "foto_bache.jpg",
-      "estado": "Pendiente"
+      "tipoReporte": "Alumbrado",
+      "titulo": "Un poste a punto de Caerse",
+      "fecha": "2026-05-14",
+      "hora": "13:30",
+      "ubicacion": "Frente a la canchas",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "9srrFncnh6s"
     },
     {
-      "tipoReporte": "Ruido",
-      "titulo": "Ruido extremo",
-      "fecha": "2026-05-14",
-      "hora": "02:56",
-      "ubicacion": "Canchas de futbol",
-      "evidencia": null,
+      "tipoReporte": "Mascota",
+      "titulo": "Mascota muy ruidosa",
+      "fecha": "2026-05-13",
+      "hora": "00:12",
+      "ubicacion": "Villa 18 - Manzana 5",
+      "evidencia": "image-removebg-preview.png",
       "estado": "Pendiente",
-      "id": "tfTeK9mqHuY"
+      "id": "I8IFLIxbGF4"
+    },
+    {
+      "tipoReporte": "Basura",
+      "titulo": "Basura en las calle de la manzana",
+      "fecha": "2026-05-22",
+      "hora": "14:32",
+      "ubicacion": "Manzana 4",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "ZFAKzDGnu_0"
+    },
+    {
+      "tipoReporte": "Vandalismo",
+      "titulo": "Un grafiti frente a mi casa en el garaje",
+      "fecha": "2026-05-15",
+      "hora": "02:33",
+      "ubicacion": "Villa 8 - Manzana8",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "QZ8n5g8O6_U"
+    },
+    {
+      "tipoReporte": "Mascota",
+      "titulo": "La mascota de mi vecina es muy cochino",
+      "fecha": "2026-05-15",
+      "hora": "03:20",
+      "ubicacion": "Villa 6 - Manzana 4",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "ulX6J4ECwvg"
+    },
+    {
+      "tipoReporte": "Basura",
+      "titulo": "La construcción de la villa 4, esta dejando muchos escombros",
+      "fecha": "2026-05-14",
+      "hora": "02:25",
+      "ubicacion": "Villa 4 - Manzana 4",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "9f32bc3QlMY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
