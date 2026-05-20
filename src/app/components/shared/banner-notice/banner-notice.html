@@ -1,0 +1,19 @@
+<div class="banner-notice-container d-flex align-items-center p-3 mb-3 shadow-sm"
+     [style.border-left-color]="config?.borderColor || 'var(--primary-color)'">
+  
+  @if (config?.icon) {
+    <div class="banner-icon-zone me-3 fs-4 d-flex align-items-center justify-content-center">
+      <i [class]="config.icon" [style.color]="config?.iconColor || 'var(--primary-color)'"></i>
+    </div>
+  }
+
+  <div class="banner-text-zone flex-grow-1">
+    <h5 class="fw-bold mb-1 banner-title">
+      {{ config?.titulo || 'Aviso Programado' }}
+    </h5>
+    <p class="mb-0 text-muted banner-subtitle fs-6">
+      {{ config?.subtitulo }}
+    </p>
+  </div>
+
+</div>

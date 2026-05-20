@@ -1,0 +1,25 @@
+.banner-notice-container {
+    background-color: rgba(255, 205, 97, 0.08); 
+    border-left: 5px solid var(--secondary-color);
+    border-radius: 4px 16px 16px 4px; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.banner-notice-container:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 .25rem .75rem rgba(0,0,0,.05);
+}
+
+.banner-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.banner-subtitle {
+    color: var(--grey-color);
+}
+
+.banner-icon-zone {
+    min-width: 40px;
+    height: 40px;
+}

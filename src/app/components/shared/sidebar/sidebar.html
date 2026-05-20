@@ -16,22 +16,36 @@
       </a>
     </li>
     <li>
-      <a routerLink="/reportes" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+      <a routerLink="/reports-list" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
         <i class="fa-solid fa-handshake me-3"></i> Incidentes
-      </a>
+      </a>      
     </li>
     <li>
-      <a routerLink="/comunidad" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+      <a  class="nav-link text-white d-flex align-items-center" (click)="toggleComunidad()">
         <i class="fa-solid fa-users me-3"></i> Comunidad
       </a>
+      @if (isComunidadOpen()) {
+        <ul class="nav nav-pills flex-column ms-4 mt-1 gap-1 border-start ps-2">
+          <li>
+            <a routerLink="/comunity/events" routerLinkActive="active" class="nav-link text-white d-flex align-items-center py-2 fs-6">
+              <i class="fa-solid fa-calendar-day me-3"></i> Eventos
+            </a>
+          </li>
+          <li>
+            <a routerLink="/comunity/market" routerLinkActive="active" class="nav-link text-white d-flex align-items-center py-2 fs-6">
+              <i class="fa-solid fa-shop me-3"></i> Mercado
+            </a>
+          </li>
+        </ul>
+      }
     </li>
     <li>
-      <a routerLink="/seguimiento" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+      <a routerLink="/follow" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
         <i class="fas fa-clipboard-list me-4"></i> Seguimiento
       </a>
     </li>
     <li>
-      <a routerLink="/perfil" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
+      <a routerLink="/profile" routerLinkActive="active" class="nav-link text-white d-flex align-items-center">
         <i class="fa-solid fa-circle-user me-4"></i> Mi Perfil
       </a>
     </li>
