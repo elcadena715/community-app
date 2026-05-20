@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ReportsList } from './components/reports/reports-list/reports-list';
 import { Dashboard } from './components/dashboard/dashboard';
-import { Market } from './components/market/market';
+//import { Market } from './components/market/market';
 
 export const routes: Routes = [
     //Ruta para el dashboard
@@ -13,7 +13,7 @@ export const routes: Routes = [
         path: "comunity", 
         children: [
             // { path: "events", component: ReportsList }, 
-            { path: "market", component: Market } 
+            //{ path: "market", component: Market } 
         ]
     }, 
     
