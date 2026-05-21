@@ -18,7 +18,7 @@ import { ServFollowsJson } from '../../../services/follows/serv-follows-json';
 export class ReportsList implements OnInit {
   reportes = signal<Reporte[]>([]);
   isModalOpen = signal<boolean>(false); 
-  fotoSeleccionada = signal<string | null>(null);
+  evidenciaSeleccionada = signal<string | null>(null);
   isSuccessModalOpen = signal<boolean>(false);
   exitoConfig = signal<any>(null);
 
@@ -61,7 +61,7 @@ export class ReportsList implements OnInit {
       fecha: ['', Validators.required],
       hora: ['', Validators.required],
       ubicacion: ['', Validators.required],
-      evidencia: ['Sin evidencia'],
+      evidencia: [null, Validators.required],
       estado: ['Pendiente']
     });
   }
@@ -69,8 +69,8 @@ export class ReportsList implements OnInit {
 
   openNew() {
     this.editingId = null;
-    this.fotoSeleccionada.set(null);
-    this.formReporte.reset({ estado: 'Pendiente', tipoReporte: '', evidencia: 'Sin evidencia' });
+    this.evidenciaSeleccionada.set(null);
+    this.formReporte.reset({ estado: 'Pendiente', tipoReporte: '', evidencia: null });
     this.isModalOpen.set(true); 
   }
 
@@ -78,22 +78,30 @@ export class ReportsList implements OnInit {
     const file = event.target.files[0];
     
     if (file) {
-      this.fotoSeleccionada.set(file.name);
+      this.evidenciaSeleccionada.set(file.name);
       this.formReporte.patchValue({ evidencia: file.name });
+      this.formReporte.get('evidencia')?.markAsTouched();
     }
   }
 
-  removerFoto() {
-    this.fotoSeleccionada.set(null);
-    this.formReporte.patchValue({ evidencia: 'Sin evidencia' });
+  esVideo(nombreArchivo: string | null): boolean {
+    if (!nombreArchivo) return false;
+    const ext = nombreArchivo.split('.').pop()?.toLowerCase();
+    return ['mp4', 'webm', 'ogg', 'mov', 'avi'].includes(ext || '');
+  }
+
+  removerEvidencia() {
+    this.evidenciaSeleccionada.set(null);
+    this.formReporte.patchValue({ evidencia: null });
+    this.formReporte.get('evidencia')?.markAsTouched();
   }
 
   openEdit(reporte: Reporte) {
     this.editingId = reporte.id!;
     if (reporte.evidencia && reporte.evidencia !== 'Sin evidencia') {
-      this.fotoSeleccionada.set(reporte.evidencia);
+      this.evidenciaSeleccionada.set(reporte.evidencia);
     } else {
-      this.fotoSeleccionada.set(null);
+      this.evidenciaSeleccionada.set(null);
     }
     this.formReporte.patchValue(reporte);
     this.isModalOpen.set(true); 

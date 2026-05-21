@@ -1,0 +1,58 @@
+/* Botones con los colores de tu paleta */
+.btn-new {
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: all 0.2s;
+}
+.btn-new:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.btn-contact {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-contact:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* Buscador */
+.custom-search {
+  border-radius: 0 10px 10px 0;
+  padding: 12px;
+}
+.search-wrapper {
+  border-radius: 10px;
+}
+
+/* Card Rectangular Horizontal */
+.product-card-horizontal {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-color) !important;
+}
+
+.product-card-horizontal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.05) !important;
+}
+
+/* Caja de Emojis */
+.product-emoji-box {
+  background-color: var(--bg-color);
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
+  border: 1px solid var(--border-color);
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  /*-webkit-line-clamp: 2;*/
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}

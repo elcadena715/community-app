@@ -69,6 +69,16 @@
       "evidencia": "image-removebg-preview.png",
       "estado": "En revisión",
       "id": "Y4nXiN9f3vs"
+    },
+    {
+      "tipoReporte": "Basura",
+      "titulo": "Mi vecino no respeta el horario de la basura",
+      "fecha": "2026-05-21",
+      "hora": "16:56",
+      "ubicacion": "Villa 10 - Manzana 1",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "caXpnxyQtQs"
     }
   ],
   "seguimientos": [
@@ -157,6 +167,60 @@
       "descripcion": "Pasaremos todo el dia y noche en las canchas",
       "estado": "Próximo",
       "id": "zob3ihc8KJg"
+    }
+  ],
+  "productos": [
+    {
+      "id": "1",
+      "name": "HP Portátil de 17 pulgadas",
+      "description": "Pantalla FHD IPS de 17.3 pulgadas, AMD Ryzen 5, 8GB de RAM, SSD de 512 GB. Nueva de paquete con Windows 11.",
+      "price": 659.99,
+      "status": "Disponible",
+      "condition": "Buen estado",
+      "emoji": "💻",
+      "owner": "Ing. Carlos Mendoza (Villa 12)"
+    },
+    {
+      "id": "2",
+      "name": "Bicicleta Estática de Spinning",
+      "description": "Ideal para hacer cardio en casa, manubrio ajustable, volante de inercia silencioso. Todo en excelente estado, poco uso.",
+      "price": 80,
+      "status": "Separado",
+      "condition": "Estado Regular",
+      "emoji": "🚲",
+      "owner": "María Belén (Villa 3)"
+    }
+  ],
+  "mis-productos": [
+    {
+      "name": "Balon de Futbol 11",
+      "description": "Pelota de tamaño 5",
+      "price": 14,
+      "emoji": "⚽​",
+      "status": "Disponible",
+      "condition": "Buen estado",
+      "owner": "Abel Mora",
+      "id": "zuFGUqWoSEY"
+    },
+    {
+      "name": "Balon de Basketball",
+      "description": "Balon de la nba ",
+      "price": 40,
+      "emoji": "🏀",
+      "status": "Separado",
+      "condition": "Buen estado",
+      "owner": "Abel Mora",
+      "id": "bX4biv4T7Vs"
+    },
+    {
+      "name": "Telefono",
+      "description": "Samsung S20",
+      "price": 450,
+      "emoji": "📱",
+      "status": "Disponible",
+      "condition": "Nuevo",
+      "owner": "Abel Mora",
+      "id": "fTtHXoI2bIo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

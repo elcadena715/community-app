@@ -1,0 +1,143 @@
+<div class="container-fluid mt-4 px-4">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-4">
+      <button class="btn btn-sm btn-outline-secondary rounded-3" (click)="volverAVitrina()">
+        ← Volver al Mercado
+      </button>
+    </div>
+    <div class="col-md-4 text-center">
+      <h2 class="fw-bold m-0 text-primary-custom">Mis Productos</h2>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-new btn-outline-dark fw-bold" (click)="openNew()">
+        + Nuevo Producto
+      </button>
+    </div>
+  </div>
+
+  <h4 class="mb-3 fw-bold text-dark">Productos Publicados</h4>
+  <app-table-reporte-crud
+    [data]="misProductos()"
+    [columnas]="[
+      { key: 'emoji', label: 'Icono' },
+      { key: 'name', label: 'Nombre del Producto' },
+      { key: 'description', label: 'Descripción' },
+      { key: 'price', label: 'Precio ($)' },
+      { key: 'status', label: 'Estado' }
+    ]"
+    (editar)="openEdit($event)"
+    (eliminar)="deleteProductConfirm($event)">
+  </app-table-reporte-crud>
+</div>
+
+<div class="modal fade" 
+     [class.show]="isModalOpen()" 
+     [style.display]="isModalOpen() ? 'block' : 'none'" 
+     tabindex="-1">
+     
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      
+      <div class="d-flex justify-content-between align-items-center mb-2 px-3 pt-4">
+        <h4 class="fw-bold m-0 text-dark">
+          {{ editingId ? 'Modificar Producto' : 'Registrar Nuevo Producto' }}
+        </h4>
+        <button type="button" class="btn-close text-primary fw-bold" (click)="cerrarModal()"></button>
+      </div>
+
+      <div class="modal-body px-4 pb-4">
+        <form [formGroup]="formProducto" (submit)="save()">
+          
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">Nombre del Producto</label>
+            <input type="text" class="form-control custom-input" formControlName="name" placeholder="Ej. Torta de tres leches, Humitas...">
+            @if(formProducto.get('name')?.touched && formProducto.get('name')?.invalid) {
+              <div class="text-danger small mt-1">El nombre es obligatorio (Mínimo 3 caracteres)</div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">Descripción Corta</label>
+            <textarea class="form-control custom-input" formControlName="description" rows="2" placeholder="Detalles de entrega, porciones, etc..."></textarea>
+            @if(formProducto.get('description')?.touched && formProducto.get('description')?.invalid) {
+              <div class="text-danger small mt-1">Ingresa una descripción válida del artículo</div>
+            }
+          </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label class="form-label text-dark fw-medium">Precio ($)</label>
+          <input type="number" class="form-control custom-input" formControlName="price" step="0.01">
+          @if(formProducto.get('price')?.touched && formProducto.get('price')?.invalid) {
+            <div class="text-danger small mt-1">El precio es obligatorio y debe ser mayor a 0</div>
+          }
+        </div>
+        
+        <div class="col-6">
+          <label class="form-label text-dark fw-medium">Emoji Representativo</label>
+          <select class="form-select custom-input" formControlName="emoji">
+            <option value="" disabled selected>Selecciona un icono...</option> @for (item of listaEmojis; track item.icono) {
+              <option [value]="item.icono">
+                {{ item.icono }} {{ item.etiqueta }}
+              </option>
+            }
+          </select>
+          @if(formProducto.get('emoji')?.touched && formProducto.get('emoji')?.invalid) {
+            <div class="text-danger small mt-1">Debes seleccionar un emoji representativo</div>
+          }
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label text-dark fw-medium">Condición del Artículo</label>
+        <div class="row g-2">
+          @for (cond of condiciones; track cond) {
+            <div class="col-4">
+              <input type="radio" class="btn-check" [id]="'cond_'+cond" [value]="cond" formControlName="condition">
+              <label class="btn btn-outline-custom w-100 rounded-3 py-2 text-dark small" [for]="'cond_'+cond">
+                {{ cond }}
+              </label>
+            </div>
+          }
+        </div>
+        @if(formProducto.get('condition')?.touched && formProducto.get('condition')?.invalid) {
+          <div class="text-danger small mt-1">Selecciona la condición física del artículo</div>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label text-dark fw-medium">Disponibilidad Actual</label>
+        <div class="row g-2">
+          @for (est of estados; track est) {
+            <div class="col-4">
+              <input type="radio" class="btn-check" [id]="'est_'+est" [value]="est" formControlName="status">
+              <label class="btn btn-outline-custom w-100 rounded-3 py-2 text-dark small" [for]="'est_'+est">
+                {{ est }}
+              </label>
+            </div>
+          }
+        </div>
+        @if(formProducto.get('status')?.touched && formProducto.get('status')?.invalid) {
+          <div class="text-danger small mt-1">Selecciona el estado de disponibilidad actual</div>
+        }
+      </div>
+
+          <button type="submit" class="btn btn-contact w-100 rounded-3 py-3 text-white fw-bold shadow-sm">
+            {{ editingId ? 'Guardar Cambios' : 'Publicar en la Vitrina' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog
+  [isOpen]="isSuccessModalOpen()" 
+  [config]="exitoConfig()" 
+  (onClose)="cerrarModalExito()"
+  (onConfirm)="confirmarAccionDialog()">
+</app-dialog>
+
+@if(isModalOpen() || isSuccessModalOpen()) {
+  <div class="modal-backdrop fade show"></div>
+}

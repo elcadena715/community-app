@@ -1,0 +1,49 @@
+<div class="container-fluid mt-4 px-4">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <h2 class="fw-bold m-0 text-primary-custom">Mercado Comunitario</h2>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-new btn-outline-dark fw-bold" (click)="redireccionarAlCrud()">
+        Publicar un Producto
+      </button>
+    </div>
+  </div>
+
+  <h4 class="mb-3 fw-bold text-dark">Productos de la Comunidad</h4>
+  
+  <div class="input-group mb-4 shadow-sm search-wrapper">
+    <span class="input-group-text bg-white border-end-0">🔍</span>
+    <input type="text" class="form-control border-start-0 custom-search" 
+           placeholder="¿Qué estás buscando hoy en la comunidad?..." 
+           [(ngModel)]="searchQuery">
+  </div>
+
+  <div class="row g-3 mb-5">
+    @for (prod of productos() | filter: searchQuery; track prod.id) {
+        <div class="col-12 col-lg-6">
+        <app-card-product 
+            [producto]="prod" 
+            (onContactar)="contactarVecino($event)">
+        </app-card-product>
+        </div>
+    } @empty {
+        <div class="col-12 text-center text-muted py-5 bg-white rounded-4 border">
+        No hay productos publicados actualmente en la comunidad.
+        </div>
+    }
+    </div>
+ 
+</div>
+
+<app-dialog
+  [isOpen]="isSuccessModalOpen()" 
+  [config]="exitoConfig()" 
+  (onClose)="cerrarModalExito()"
+  (onConfirm)="confirmarAccionDialog()">
+</app-dialog>
+
+@if(isSuccessModalOpen()) {
+  <div class="modal-backdrop fade show"></div>
+}
