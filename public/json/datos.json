@@ -67,7 +67,7 @@
       "hora": "23:57",
       "ubicacion": "Villa 8 - Manzana 8",
       "evidencia": "image-removebg-preview.png",
-      "estado": "Pendiente",
+      "estado": "En revisión",
       "id": "Y4nXiN9f3vs"
     }
   ],
@@ -104,6 +104,17 @@
       "hora": "19:41",
       "publicar": true,
       "id": "1KbulQeiw3k"
+    },
+    {
+      "idReporte": "Y4nXiN9f3vs",
+      "tituloReporte": "No hay luz en mi calle desde anoche",
+      "estado": "En revisión",
+      "autoridad": "Cnel",
+      "mensaje": "La luz se arreglo correctamente",
+      "fecha": "2026-05-23",
+      "hora": "12:30",
+      "publicar": true,
+      "id": "IFJWxzukPTY"
     }
   ],
   "eventos": [
