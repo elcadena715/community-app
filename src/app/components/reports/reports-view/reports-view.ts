@@ -31,7 +31,7 @@ export class ReportsView {
       id: 'apertura-' + rep.id,
       estado: 'Pendiente',
       autoridad: 'Incidente Reportado',
-      mensaje: `Tipo de Reporte "${rep.tipoReporte}". Ubicación especificada: ${rep.ubicacion}.`,
+      mensaje: `Descripción del Incidente: "${rep.titulo}". Ubicación especificada: ${rep.ubicacion}.`,
       fecha: rep.fecha,
       hora: rep.hora
     };
