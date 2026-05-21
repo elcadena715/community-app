@@ -24,9 +24,14 @@ export class TableReporteCrud {
   }
 
   @Input() columnas: { key: string, label: string }[] = [];
+  @Input() mostrarAcciones: boolean = true;
+
+  @Input() mostrarVerEstado: boolean = false;
   
   @Output() editar = new EventEmitter<any>();
   @Output() eliminar = new EventEmitter<any>();
+
+  @Output() verEstado = new EventEmitter<any>();
 
   searchText: string = '';
   paginaActual: number = 1;

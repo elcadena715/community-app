@@ -1,0 +1,154 @@
+<div class="container-fluid mt-4 px-4">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <h2 class="fw-bold m-0">Eventos</h2>
+    </div>
+    <div class="col-md-4 text-end">
+      <button class="btn btn-new btn-outline-dark fw-bold" (click)="openNew()">
+        + Nuevo Evento
+      </button>
+    </div>
+  </div>
+
+  <h4 class="mb-3">Próximos Eventos</h4>
+
+  <app-table-reporte-crud
+    [data]="eventos()"
+    [columnas]="[
+      { key: 'tipoEvento', label: 'Tipo de Evento' },
+      { key: 'titulo', label: 'Evento' },
+      { key: 'fecha', label: 'Fecha' },
+      { key: 'hora', label: 'Hora' },
+      { key: 'ubicacion', label: 'Zona' },
+      { key: 'descripcion', label: 'Descripción' },
+      { key: 'estado', label: 'Estado' }
+    ]"
+    (editar)="openEdit($event)"
+    (eliminar)="delete($event)">
+  </app-table-reporte-crud>
+</div>
+
+<div class="modal fade" 
+     [class.show]="isModalOpen()" 
+     [style.display]="isModalOpen() ? 'block' : 'none'" 
+     tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+
+      <div class="d-flex justify-content-between align-items-center p-4 pb-2">
+        <h4 class="fw-bold m-0 text-dark"> {{ editingId ? 'Editar Evento' : 'Nuevo Evento' }}</h4>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body px-4 pb-4">
+        <form [formGroup]="formEvento" (submit)="save()">
+
+          <div class="mb-4">
+            <label class="form-label text-dark fw-medium">
+              Tipo de evento
+            </label>
+            <div class="row g-2">
+              @for (cat of categorias; track cat) {
+                <div class="col-6">
+                  <input type="radio" class="btn-check" [id]="cat" [value]="cat" formControlName="tipoEvento">
+                  <label class="btn btn-outline-custom w-100 rounded-3 py-2 text-dark" [for]="cat">
+                    {{ cat }}
+                  </label>
+                </div>
+              }
+            </div>
+
+            @if(formEvento.get('tipoEvento')?.touched && formEvento.get('tipoEvento')?.invalid) {
+              @if(formEvento.get('tipoEvento')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Seleccione un tipo de evento </div>
+              }
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">Nombre del evento</label>
+            <input type="text" class="form-control custom-input" formControlName="titulo">
+
+            @if(formEvento.get('titulo')?.errors?.['pattern']) {
+                <div class="text-danger small mt-1">Ingrese solo letras</div>
+              }
+            @if(formEvento.get('titulo')?.touched && formEvento.get('titulo')?.invalid) {
+              @if(formEvento.get('titulo')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Ingrese el nombre del evento</div>
+              }
+              @if(formEvento.get('titulo')?.errors?.['minlength']) {
+                <div class="text-danger small mt-1">El nombre debe tener al menos 5 caracteres</div>
+              }
+              @if(formEvento.get('titulo')?.errors?.['maxlength']) {
+                <div class="text-danger small mt-1">El nombre no puede superar los 70 caracteres</div>
+              }
+            }
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-6">
+              <label class="form-label text-dark fw-medium">Fecha</label>
+              <input type="date" class="form-control custom-input" formControlName="fecha">
+              @if(formEvento.get('fecha')?.touched && formEvento.get('fecha')?.invalid) {
+                @if(formEvento.get('fecha')?.errors?.['required']) {
+                  <div class="text-danger small mt-1">Ingrese una fecha</div>
+                }
+              }
+            </div>
+
+            <div class="col-6">
+              <label class="form-label text-dark fw-medium">Hora</label>
+              <input type="time" class="form-control custom-input" formControlName="hora">
+              @if(formEvento.get('hora')?.touched && formEvento.get('hora')?.invalid) {
+                @if(formEvento.get('hora')?.errors?.['required']) {
+                  <div class="text-danger small mt-1">Ingrese una hora</div>
+                }
+              }
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">Zona</label>
+            <input type="text" class="form-control custom-input" formControlName="ubicacion">
+
+            @if(formEvento.get('ubicacion')?.errors?.['pattern']) {
+                <div class="text-danger small mt-1">La ubicación contiene caracteres no permitidos</div>
+              } 
+            @if(formEvento.get('ubicacion')?.touched && formEvento.get('ubicacion')?.invalid) {
+              @if(formEvento.get('ubicacion')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Ingrese la zona del evento</div>
+              }
+            }
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-dark fw-medium">Descripción</label>
+            <textarea rows="3" class="form-control custom-input" formControlName="descripcion"></textarea>
+            @if(formEvento.get('descripcion')?.touched && formEvento.get('descripcion')?.invalid) {
+              @if(formEvento.get('descripcion')?.errors?.['required']) {
+                <div class="text-danger small mt-1">Ingrese una descripción</div>
+              }
+              @if(formEvento.get('descripcion')?.errors?.['minlength']) {
+                <div class="text-danger small mt-1">La descripción debe tener al menos 10 caracteres</div>
+              }
+            }
+          </div>
+          <button type="submit"class="btn btn-send w-100 rounded-3 py-3 text-white fw-bold shadow-sm"> {{ editingId ? 'Actualizar Evento' : 'Crear Evento' }} </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog
+  [isOpen]="isSuccessModalOpen()"
+  [config]="exitoConfig()"
+  (onClose)="cerrarModalExito()"
+  (onConfirm)="confirmarAccionDialog()">
+</app-dialog>
+
+@if(isModalOpen() || isSuccessModalOpen()) {
+  <div class="modal-backdrop fade show"></div>
+}

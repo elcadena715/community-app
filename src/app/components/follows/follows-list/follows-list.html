@@ -1,0 +1,39 @@
+<div class="container-fluid mt-4 px-4">
+
+  <div class="row align-items-center mb-4">
+
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4 text-center">
+      <h2 class="fw-bold m-0">Seguimiento</h2>
+    </div>
+
+    <div class="col-md-4 text-end">
+
+      <button class="btn btn-new btn-outline-dark fw-bold" (click)="openNew()">
+
+        + Nueva Actualización
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <h4 class="mb-3">Seguimiento de Casos</h4>
+
+  <app-table-reporte-crud [data]="seguimientos()" [columnas]="[
+    { key: 'idReporte', label: 'Reporte' },
+    { key: 'tituloReporte', label: 'Titulo' },
+    { key: 'estado', label: 'Estado' },
+    { key: 'autoridad', label: 'Autoridad' },
+    { key: 'fecha', label: 'Fecha' }
+  ]" (editar)="openEdit($event)" (eliminar)="delete($event)">
+  </app-table-reporte-crud>
+
+</div>
+<app-follows-crud (success)="mostrarFeedbackDesdeCrud($event)">
+</app-follows-crud>
+<app-dialog [isOpen]="isSuccessModalOpen()" [config]="exitoConfig()" (onClose)="cerrarModalExito()"
+  (onConfirm)="confirmarAccionDialog()">
+</app-dialog>

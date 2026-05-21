@@ -1,0 +1,28 @@
+.timeline-wrapper {
+    border-left: 3px solid var(--border-color);
+}
+
+.timeline-entry {
+    min-height: 100px;
+}
+
+.timeline-marker {
+    width: 18px;
+    height: 18px;
+    top: 20px;
+    border: 4px solid var(--white-color);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+    z-index: 1;
+}
+
+.fs-7 { font-size: 0.85rem; }
+
+.btn-secondary{
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}

@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Reporte } from '../../../models/reports';
-import { ServReportesJson } from '../../../services/serv-reports-json';
+import { ServReportesJson } from '../../../services/reports/serv-reports-json';
 
 declare const bootstrap: any; 
 
@@ -67,12 +67,12 @@ export class ReporteCrud implements OnInit {
     const data = this.formReporte.value;
     if (this.editingId) {
       this.miServicio.updateReporte({ ...data, id: this.editingId }).subscribe(() => {
-        this.recargar.emit(); // Avisamos que recargue la tabla
+        this.recargar.emit(); 
         this.cerrarModal();
       });
     } else {
       this.miServicio.addReporte(data).subscribe(() => {
-        this.recargar.emit(); // Avisamos que recargue la tabla
+        this.recargar.emit(); 
         this.cerrarModal();
       });
     }

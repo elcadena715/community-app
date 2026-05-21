@@ -2,14 +2,16 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Reporte } from '../../../models/reports';
-import { ServReportesJson } from '../../../services/serv-reports-json';
+import { ServReportesJson } from '../../../services/reports/serv-reports-json';
 import { TableReporteCrud } from '../../shared/table-crud/table-crud'; 
 import { AppDialogComponent } from '../../shared/app-dialog/app-dialog';
+import { ReportsView } from '../reports-view/reports-view';
+import { ServFollowsJson } from '../../../services/follows/serv-follows-json';
 
 @Component({
   selector: 'app-reports-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TableReporteCrud, AppDialogComponent],
+  imports: [CommonModule, ReactiveFormsModule, TableReporteCrud, AppDialogComponent, ReportsView],
   templateUrl: './reports-list.html',
   styleUrls: ['./reports-list.css']
 })
@@ -19,6 +21,12 @@ export class ReportsList implements OnInit {
   fotoSeleccionada = signal<string | null>(null);
   isSuccessModalOpen = signal<boolean>(false);
   exitoConfig = signal<any>(null);
+
+  isViewOpen = signal<boolean>(false);      
+  selectedReport = signal<any>(null);       
+  seguimientos = signal<any[]>([]);
+
+  private servFollows = inject(ServFollowsJson);
   
   formReporte!: FormGroup;
   editingId: number | null = null;
@@ -38,6 +46,8 @@ export class ReportsList implements OnInit {
       this.exitoConfig.set(JSON.parse(configGuardada));
       this.isSuccessModalOpen.set(true);
     }
+
+    this.servFollows.getSeguimientos().subscribe(data => this.seguimientos.set(data));
   }
 
   cargarReportes() {
@@ -164,5 +174,10 @@ export class ReportsList implements OnInit {
     
     this.exitoConfig.set(config);
     this.isSuccessModalOpen.set(true);
+  }
+
+  verHistorial(reporte: any) {
+    this.selectedReport.set(reporte);
+    this.isViewOpen.set(true);
   }
 }

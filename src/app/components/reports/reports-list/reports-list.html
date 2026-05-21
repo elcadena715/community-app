@@ -25,8 +25,16 @@
       { key: 'estado', label: 'Estado' }
     ]"
     (editar)="openEdit($event)"
-    (eliminar)="delete($event)">
+    (eliminar)="delete($event)"
+    [mostrarVerEstado]="true"
+    (verEstado)="verHistorial($event)">
   </app-table-reporte-crud>
+  <app-reports-view 
+    [isOpen]="isViewOpen()" 
+    [reporte]="selectedReport()" 
+    [todosLosSeguimientos]="seguimientos()"
+    (close)="isViewOpen.set(false)">
+  </app-reports-view>
 </div>
 
 <div class="modal fade" 

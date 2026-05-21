@@ -1,0 +1,128 @@
+<div class="modal fade" id="modalEvento" tabindex="-1" #modalElement>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+
+      <div class="d-flex justify-content-between align-items-center mb-2 px-3 pt-4">
+        <h4 class="fw-bold m-0 text-dark">
+          {{ editingId ? 'Editar Evento' : 'Nuevo Evento' }}
+        </h4>
+
+        <button
+          type="button"
+          class="btn-close btn-close-purple text-primary fw-bold"
+          (click)="cerrarModal()">
+        </button>
+      </div>
+
+      <div class="modal-body px-4 pb-4">
+
+        <form [formGroup]="formEvento" (submit)="save()">
+
+          <!-- Tipo de evento -->
+          <div class="mb-4">
+            <label class="form-label text-dark fw-medium">
+              Tipo de evento
+            </label>
+
+            <div class="row g-2">
+              @for (cat of categorias; track cat) {
+                <div class="col-6">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    [id]="cat"
+                    [value]="cat"
+                    formControlName="tipoEvento">
+
+                  <label
+                    class="btn btn-outline-custom w-100 rounded-3 py-2 text-dark"
+                    [for]="cat">
+
+                    {{ cat }}
+                  </label>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">
+              Nombre del evento
+            </label>
+
+            <input
+              type="text"
+              class="form-control custom-input"
+              formControlName="titulo">
+          </div>
+
+          <!-- Fecha y hora -->
+          <div class="row mb-3">
+
+            <div class="col-6">
+              <label class="form-label text-dark fw-medium">
+                Fecha
+              </label>
+
+              <input
+                type="date"
+                class="form-control custom-input"
+                formControlName="fecha">
+            </div>
+
+            <div class="col-6">
+              <label class="form-label text-dark fw-medium">
+                Hora
+              </label>
+
+              <input
+                type="time"
+                class="form-control custom-input"
+                formControlName="hora">
+            </div>
+
+          </div>
+
+          <!-- Ubicación -->
+          <div class="mb-3">
+            <label class="form-label text-dark fw-medium">
+              Ubicación
+            </label>
+
+            <input
+              type="text"
+              class="form-control custom-input"
+              formControlName="zona">
+          </div>
+
+          <!-- Descripción -->
+          <div class="mb-4">
+            <label class="form-label text-dark fw-medium">
+              Descripción
+            </label>
+
+            <textarea
+              rows="3"
+              class="form-control custom-input"
+              formControlName="descripcion">
+            </textarea>
+          </div>
+
+          <!-- Botón -->
+          <div class="mt-2">
+            <button
+              type="submit"
+              class="btn btn-purple w-100 rounded-3 py-3 text-white shadow-sm">
+
+              {{ editingId ? 'Actualizar Evento' : 'Crear Evento' }}
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>

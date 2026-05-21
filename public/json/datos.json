@@ -1,0 +1,152 @@
+{
+  "reportes": [
+    {
+      "tipoReporte": "Alumbrado",
+      "titulo": "Un poste a punto de Caerse",
+      "fecha": "2026-05-14",
+      "hora": "13:30",
+      "ubicacion": "Frente a la canchas",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Resuelto",
+      "id": "9srrFncnh6s"
+    },
+    {
+      "tipoReporte": "Mascota",
+      "titulo": "Mascota muy ruidosa",
+      "fecha": "2026-05-13",
+      "hora": "00:12",
+      "ubicacion": "Villa 18 - Manzana 5",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "I8IFLIxbGF4"
+    },
+    {
+      "tipoReporte": "Basura",
+      "titulo": "Basura en las calle de la manzana",
+      "fecha": "2026-05-22",
+      "hora": "14:32",
+      "ubicacion": "Manzana 4",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "ZFAKzDGnu_0"
+    },
+    {
+      "tipoReporte": "Vandalismo",
+      "titulo": "Un grafiti frente a mi casa en el garaje",
+      "fecha": "2026-05-15",
+      "hora": "02:33",
+      "ubicacion": "Villa 8 - Manzana8",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "QZ8n5g8O6_U"
+    },
+    {
+      "tipoReporte": "Mascota",
+      "titulo": "La mascota de mi vecina es muy cochino",
+      "fecha": "2026-05-15",
+      "hora": "03:20",
+      "ubicacion": "Villa 6 - Manzana 4",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Resuelto",
+      "id": "ulX6J4ECwvg"
+    },
+    {
+      "tipoReporte": "Basura",
+      "titulo": "La construcción de la villa 4, esta dejando muchos escombros",
+      "fecha": "2026-05-14",
+      "hora": "02:25",
+      "ubicacion": "Villa 4 - Manzana 4",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Resuelto",
+      "id": "9f32bc3QlMY"
+    },
+    {
+      "tipoReporte": "Alumbrado",
+      "titulo": "No hay luz en mi calle desde anoche",
+      "fecha": "2026-05-20",
+      "hora": "23:57",
+      "ubicacion": "Villa 8 - Manzana 8",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Pendiente",
+      "id": "Y4nXiN9f3vs"
+    }
+  ],
+  "seguimientos": [
+    {
+      "idReporte": "9srrFncnh6s",
+      "tituloReporte": "Un poste a punto de Caerse",
+      "estado": "Resuelto",
+      "autoridad": "Cnel",
+      "mensaje": "Cnel ya arreglo el problema",
+      "fecha": "2026-05-22",
+      "hora": "22:19",
+      "publicar": true,
+      "id": "3-JJFOOU6ak"
+    },
+    {
+      "idReporte": "9f32bc3QlMY",
+      "tituloReporte": "La construcción de la villa 4, esta dejando muchos escombros",
+      "estado": "Resuelto",
+      "autoridad": "Secretario",
+      "mensaje": "Se permitio la entrada de un camion para sacar todos los escombros",
+      "fecha": "2026-05-21",
+      "hora": "19:26",
+      "publicar": true,
+      "id": "6bf8eAD-BDU"
+    },
+    {
+      "idReporte": "ulX6J4ECwvg",
+      "tituloReporte": "La mascota de mi vecina es muy cochino",
+      "estado": "Resuelto",
+      "autoridad": "Secretario",
+      "mensaje": "El problema se resolvió con ambos vecinos",
+      "fecha": "2026-05-22",
+      "hora": "19:41",
+      "publicar": true,
+      "id": "1KbulQeiw3k"
+    }
+  ],
+  "eventos": [
+    {
+      "tipoEvento": "Deportivo",
+      "titulo": "Campeonato",
+      "fecha": "2026-05-23",
+      "hora": "10:00",
+      "ubicacion": "Canchas ",
+      "descripcion": "Torneo de futbol, básquet y voleibol",
+      "estado": "Próximo",
+      "id": "N2ulhd4SSMg"
+    },
+    {
+      "tipoEvento": "Social",
+      "titulo": "Bingo",
+      "fecha": "2026-05-31",
+      "hora": "12:00",
+      "ubicacion": "Norte",
+      "descripcion": "Bingo solidario",
+      "estado": "Próximo",
+      "id": "UwHN5VxtuiE"
+    },
+    {
+      "tipoEvento": "Social",
+      "titulo": "Minga",
+      "fecha": "2026-06-06",
+      "hora": "09:00",
+      "ubicacion": "Áreas Verdes Sector Norte",
+      "descripcion": "Jornada comunitaria para limpieza y mantenimiento de parques y espacios comunes.",
+      "estado": "Próximo",
+      "id": "6FDDHArX4Do"
+    },
+    {
+      "tipoEvento": "Deportivo",
+      "titulo": "Cumpleaños de Manuel Andres",
+      "fecha": "2026-05-21",
+      "hora": "02:16",
+      "ubicacion": "Canchas de la comunidad",
+      "descripcion": "Pasaremos todo el dia y noche en las canchas",
+      "estado": "Próximo",
+      "id": "zob3ihc8KJg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

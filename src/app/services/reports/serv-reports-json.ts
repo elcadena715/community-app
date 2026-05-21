@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Reporte } from '../models/reports';
+import { Reporte } from '../../models/reports';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +36,10 @@ export class ServReportesJson {
   deleteReporte(id: number): Observable<void> {
     const urlReporteAEliminar = `${this.reportesUrl}/${id}`;
     return this.http.delete<void>(urlReporteAEliminar);
+  }
+
+  patchEstadoReporte(id: string | number, nuevoEstado: string): Observable<Reporte> {
+    const url = `${this.reportesUrl}/${id}`;
+    return this.http.patch<Reporte>(url, { estado: nuevoEstado });
   }
 }

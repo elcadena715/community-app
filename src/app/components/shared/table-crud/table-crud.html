@@ -16,21 +16,39 @@
             @for (col of columnas; track col.key) {
               <th>{{ col.label }}</th>
             }
-            <th>Acciones</th>
+            @if (mostrarAcciones) {
+              <th>Acciones</th>
+            }
           </tr>
         </thead>
         <tbody>
           @for (item of dataPaginada | filter: searchText; track item.id || $index) {
             <tr class="text-danger">
-              
               @for (col of columnas; track col.key) {
                 <td>{{ item[col.key] }}</td>
               }
-              
-              <td>
-                <button class="btn edit-btn btn-sm me-1 border border-dark " (click)="editar.emit(item)"><i class="fa-solid fa-pen me-2"></i>Editar</button>
-                <button class="btn btn-sm btn-danger" (click)="eliminar.emit(item)"><i class="fa-solid fa-trash me-2"></i>Eliminar</button>
-              </td>
+              @if (mostrarAcciones || mostrarVerEstado) {
+                <td>
+                  <div class="d-inline-flex gap-1 justify-content-center align-items-center">
+                    
+                    @if (mostrarVerEstado) {
+                      <button class="btn edit-btn btn-sm border border-dark lh-sm" (click)="verEstado.emit(item)">
+                        <i class="fa-solid fa-eye me-2"></i>Ver Estado
+                      </button>
+                    }
+
+                    @if (mostrarAcciones) {
+                      <button class="btn edit-btn btn-sm border border-dark lh-sm" (click)="editar.emit(item)">
+                        <i class="fa-solid fa-pen me-2"></i>Editar
+                      </button>
+                      <button class="btn btn-sm btn-danger lh-sm" (click)="eliminar.emit(item)">
+                        <i class="fa-solid fa-trash me-2"></i>Eliminar
+                      </button>
+                    }
+
+                  </div>
+                </td>
+              }
             </tr>
           } @empty {
             <tr>

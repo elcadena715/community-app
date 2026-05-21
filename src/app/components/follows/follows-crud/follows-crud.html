@@ -1,0 +1,360 @@
+<div class="modal fade" [class.show]="isModalOpen()" [style.display]="isModalOpen() ? 'block' : 'none'" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+
+            <div class="d-flex justify-content-between align-items-center mb-2 px-3 pt-4">
+
+                <h4 class="fw-bold m-0 text-dark">
+
+                    {{ editingId
+                    ? 'Editar Seguimiento'
+                    : 'Nuevo Seguimiento' }}
+
+                </h4>
+
+                <button type="button" class="btn-close btn-close-purple text-primary fw-bold" (click)="cerrarModal()">
+                </button>
+
+            </div>
+
+            <div class="modal-body px-4 pb-4">
+
+                <form [formGroup]="formFollow" (ngSubmit)="save()">
+                    @if(!editingId){
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-dark fw-medium">
+
+                            Seleccione Reporte
+
+                        </label>
+
+                        <select class="form-select custom-input" formControlName="idReporte"
+                            (change)="onReporteChange()" [class.is-invalid]="
+                formFollow.get('idReporte')?.touched &&
+                formFollow.get('idReporte')?.invalid
+              ">
+
+                            <option [ngValue]="0">
+
+                                Seleccione un reporte
+
+                            </option>
+
+                            @for(reporte of reportes; track reporte.id){
+
+                            <option [ngValue]="reporte.id">
+
+                                #{{ reporte.id }} - {{ reporte.titulo }}
+
+                            </option>
+
+                            }
+
+                        </select>
+
+                        @if(
+                        formFollow.get('idReporte')?.touched &&
+                        formFollow.get('idReporte')?.invalid
+                        ){
+
+                        @if(
+                        formFollow.get('idReporte')?.errors?.['required']
+                        || formFollow.get('idReporte')?.value == 0
+                        ){
+
+                        <div class="text-danger small mt-1">
+
+                            Debes seleccionar un reporte
+
+                        </div>
+
+                        }
+
+                        }
+
+                    </div>
+
+                    }
+
+                    @if(editingId){
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-dark fw-medium">
+
+                            Reporte Asociado
+
+                        </label>
+
+                        <div class="form-control custom-input bg-light">
+
+                            #{{ formFollow.value.idReporte }}
+                            -
+                            {{ formFollow.value.tituloReporte }}
+
+                        </div>
+
+                    </div>
+
+                    }
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-dark fw-medium">
+
+                            Estado del Caso
+
+                        </label>
+
+                        <select class="form-select custom-input" formControlName="estado" [class.is-invalid]="
+                formFollow.get('estado')?.touched &&
+                formFollow.get('estado')?.invalid
+              ">
+
+                            @for(estado of estados; track estado){
+
+                            <option [value]="estado">
+
+                                {{ estado }}
+
+                            </option>
+
+                            }
+
+                        </select>
+
+                        @if(
+                        formFollow.get('estado')?.touched &&
+                        formFollow.get('estado')?.invalid
+                        ){
+
+                        @if(
+                        formFollow.get('estado')?.errors?.['required']
+                        ){
+
+                        <div class="text-danger small mt-1">
+
+                            Debes seleccionar un estado
+
+                        </div>
+
+                        }
+
+                        }
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-dark fw-medium">
+
+                            Autoridad Responsable
+
+                        </label>
+
+                        <input type="text" class="form-control custom-input" formControlName="autoridad"
+                            [class.is-invalid]="
+                formFollow.get('autoridad')?.touched &&
+                formFollow.get('autoridad')?.invalid
+              ">
+
+                        @if(
+                        formFollow.get('autoridad')?.touched &&
+                        formFollow.get('autoridad')?.invalid
+                        ){
+
+                        @if(
+                        formFollow.get('autoridad')?.errors?.['required']
+                        ){
+
+                        <div class="text-danger small mt-1">
+
+                            Ingresa la autoridad responsable
+
+                        </div>
+
+                        }
+
+                        }
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label text-dark fw-medium">
+
+                            Mensaje Oficial
+
+                        </label>
+
+                        <textarea rows="4" class="form-control custom-input" formControlName="mensaje"
+                            [class.is-invalid]="
+                formFollow.get('mensaje')?.touched &&
+                formFollow.get('mensaje')?.invalid
+              ">
+            </textarea>
+
+                        @if(
+                        formFollow.get('mensaje')?.touched &&
+                        formFollow.get('mensaje')?.invalid
+                        ){
+
+                        @if(
+                        formFollow.get('mensaje')?.errors?.['required']
+                        ){
+
+                        <div class="text-danger small mt-1">
+
+                            Debes escribir un mensaje oficial
+
+                        </div>
+
+                        }
+
+                        @if(
+                        formFollow.get('mensaje')?.errors?.['minlength']
+                        ){
+
+                        <div class="text-danger small mt-1">
+
+                            El mensaje debe tener al menos 10 caracteres
+
+                        </div>
+
+                        }
+
+                        @if(
+                        formFollow.get('mensaje')?.errors?.['maxlength']
+                        ){
+
+                        <div class="text-danger small mt-1">
+
+                            El mensaje no puede superar 250 caracteres
+
+                        </div>
+
+                        }
+
+                        }
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-6">
+
+                            <label class="form-label text-dark fw-medium">
+
+                                Fecha
+
+                            </label>
+
+                            <input type="date" class="form-control custom-input" formControlName="fecha"
+                                [class.is-invalid]="
+                  formFollow.get('fecha')?.touched &&
+                  formFollow.get('fecha')?.invalid
+                ">
+
+                            @if(
+                            formFollow.get('fecha')?.touched &&
+                            formFollow.get('fecha')?.invalid
+                            ){
+
+                            @if(
+                            formFollow.get('fecha')?.errors?.['required']
+                            ){
+
+                            <div class="text-danger small mt-1">
+
+                                Ingresa una fecha
+
+                            </div>
+
+                            }
+
+                            }
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <label class="form-label text-dark fw-medium">
+
+                                Hora
+
+                            </label>
+
+                            <input type="time" class="form-control custom-input" formControlName="hora"
+                                [class.is-invalid]="
+                  formFollow.get('hora')?.touched &&
+                  formFollow.get('hora')?.invalid
+                ">
+
+                            @if(
+                            formFollow.get('hora')?.touched &&
+                            formFollow.get('hora')?.invalid
+                            ){
+
+                            @if(
+                            formFollow.get('hora')?.errors?.['required']
+                            ){
+
+                            <div class="text-danger small mt-1">
+
+                                Ingresa una hora
+
+                            </div>
+
+                            }
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-check mb-4">
+
+                        <input type="checkbox" class="form-check-input" formControlName="publicar">
+
+                        <label class="form-check-label">
+
+                            Publicar actualización
+
+                        </label>
+
+                    </div>
+
+                    <div class="mt-2">
+
+                        <button type="submit" class="btn btn-send w-100 rounded-3 py-3 text-white fw-bold shadow-sm">
+
+                            {{ editingId
+                            ? 'Actualizar Seguimiento'
+                            : 'Guardar Seguimiento' }}
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@if(isModalOpen()) {
+
+<div class="modal-backdrop fade show"></div>
+
+}
