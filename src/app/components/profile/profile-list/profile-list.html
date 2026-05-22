@@ -1,0 +1,78 @@
+<div class="container-fluid mt-4 px-4">
+  
+  <h2 class="fw-bold text-center mb-4 text-dark" style="font-size: 2rem;">Mi perfil</h2>
+
+  <div class="card border-0 shadow-sm p-5 mb-5 text-center profile-card" style="border-radius: 20px;">
+    <div class="d-flex flex-column align-items-center justify-content-center">
+      <div class="profile-avatar">
+      <span class="fw-bold">{{ residente.iniciales }}</span>
+    </div>
+      <h3 class="fw-bold m-0 text-dark profile-name">{{ residente.nombre }}</h3>
+      <p class="text-muted m-0 mt-2 profile-details">{{ residente.ubicacion }}</p>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm p-4 mb-5" style="border-radius: 20px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 class="fw-bold m-0 text-dark">
+        <i class="fa-solid fa-paw me-2" style="color: var(--secondary-color);"></i> Mis Mascotas
+      </h4>
+      <button class="btn btn-new btn-outline-dark fw-bold px-3 rounded-3" (click)="openNew('mascota')">
+        + Nueva Mascota
+      </button>
+    </div>
+
+    <app-table-reporte-crud
+      [data]="mascotas()"
+      [columnas]="[
+        { key: 'nombre', label: 'Nombre Mascota' },
+        { key: 'especie', label: 'Especie / Raza' },
+        { key: 'edad', label: 'Edad Actual' },
+        { key: 'vacunado', label: '¿Vacunado?' }
+      ]"
+      (editar)="openEdit('mascota', $event)"
+      (eliminar)="solicitarEliminar('mascota', $event)">
+    </app-table-reporte-crud>
+  </div>
+
+  <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 20px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 class="fw-bold m-0 text-dark">
+        <i class="fa-solid fa-car me-2" style="color: var(--secondary-color);"></i> Mis Vehículos
+      </h4>
+      <button class="btn btn-new btn-outline-dark fw-bold px-3 rounded-3" (click)="openNew('vehiculo')">
+        + Nuevo Vehículo
+      </button>
+    </div>
+
+    <app-table-reporte-crud
+      [data]="vehiculos()"
+      [columnas]="[
+        { key: 'marca', label: 'Marca' },
+        { key: 'modelo', label: 'Modelo' },
+        { key: 'tipo', label: 'Clasificación' },
+        { key: 'asegurado', label: '¿Tiene Seguro?' }
+      ]"
+      (editar)="openEdit('vehiculo', $event)"
+      (eliminar)="solicitarEliminar('vehiculo', $event)">
+    </app-table-reporte-crud>
+  </div>
+</div>
+
+<app-profile-crud
+  *ngIf="isModalOpen()"
+  [type]="crudType"
+  [data]="selectedData"
+  (onCerrar)="manejarCierreCrud($event)">
+</app-profile-crud>
+
+<app-dialog
+  [isOpen]="isSuccessModalOpen()"
+  [config]="exitoConfig()"
+  (onClose)="cerrarModalExito()"
+  (onConfirm)="confirmarAccionDialog()">
+</app-dialog>
+
+@if(isModalOpen() || isSuccessModalOpen()) {
+  <div class="modal-backdrop fade show"></div>
+}

@@ -1,0 +1,24 @@
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #f0e9e3;
+    border: 3px solid var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(15, 15, 15, 0.05);
+    flex-shrink: 0; 
+}
+.profile-avatar span {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700; 
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+.btn-new:active,
+.btn-new:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}

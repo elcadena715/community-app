@@ -1,0 +1,9 @@
+.btn-send {
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--white-color);
+}
+
+.btn-send:hover {
+  background-color: var(--secondary-color) !important;
+}

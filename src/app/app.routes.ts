@@ -5,6 +5,7 @@ import { FollowsList } from './components/follows/follows-list/follows-list';
 import { EventsList } from './components/events/events-list/events-list';
 import { MarketList } from './components/market/market-list/market-list';
 import { MarketCrud } from './components/market/market-crud/market-crud';
+import { ProfileList } from './components/profile/profile-list/profile-list';
 
 export const routes: Routes = [
     { path: "dashboard", component: Dashboard },  
@@ -18,6 +19,7 @@ export const routes: Routes = [
         ]
     }, 
     { path: "follows-list", component: FollowsList }, 
+    { path: "profile", component: ProfileList }, 
     
     
     // Rutas por defecto 

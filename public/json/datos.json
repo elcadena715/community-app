@@ -67,18 +67,28 @@
       "hora": "23:57",
       "ubicacion": "Villa 8 - Manzana 8",
       "evidencia": "image-removebg-preview.png",
-      "estado": "En revisión",
+      "estado": "Resuelto",
       "id": "Y4nXiN9f3vs"
     },
     {
-      "tipoReporte": "Basura",
-      "titulo": "Mi vecino no respeta el horario de la basura",
-      "fecha": "2026-05-21",
-      "hora": "16:56",
-      "ubicacion": "Villa 10 - Manzana 1",
+      "tipoReporte": "Alumbrado",
+      "titulo": "Dentro de mi casa no hay luz",
+      "fecha": "2026-05-22",
+      "hora": "00:45",
+      "ubicacion": "Villa 8 - Manzana 8",
       "evidencia": "image-removebg-preview.png",
       "estado": "Pendiente",
-      "id": "caXpnxyQtQs"
+      "id": "4Uh0cH9J4Ng"
+    },
+    {
+      "tipoReporte": "Basura",
+      "titulo": "Mi vecino esta acumulando basura en su garaje",
+      "fecha": "2026-05-21",
+      "hora": "21:49",
+      "ubicacion": "Villa 9 - Manzana 9",
+      "evidencia": "image-removebg-preview.png",
+      "estado": "Resuelto",
+      "id": "lzWl6crMxgQ"
     }
   ],
   "seguimientos": [
@@ -118,13 +128,24 @@
     {
       "idReporte": "Y4nXiN9f3vs",
       "tituloReporte": "No hay luz en mi calle desde anoche",
-      "estado": "En revisión",
+      "estado": "Resuelto",
       "autoridad": "Cnel",
       "mensaje": "La luz se arreglo correctamente",
       "fecha": "2026-05-23",
       "hora": "12:30",
       "publicar": true,
       "id": "IFJWxzukPTY"
+    },
+    {
+      "idReporte": "lzWl6crMxgQ",
+      "tituloReporte": "Mi vecino esta acumulando basura en su garaje",
+      "estado": "Resuelto",
+      "autoridad": "Secretario",
+      "mensaje": "Hubo una conversacion y se llego a un acuerdo",
+      "fecha": "2026-05-28",
+      "hora": "02:11",
+      "publicar": true,
+      "id": "MgX36Ei_Z0o"
     }
   ],
   "eventos": [
@@ -221,6 +242,66 @@
       "condition": "Nuevo",
       "owner": "Abel Mora",
       "id": "fTtHXoI2bIo"
+    }
+  ],
+  "mascotas": [
+    {
+      "nombre": "Rocky",
+      "especie": "Perro",
+      "edad": 3,
+      "vacunado": true,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "nombre": "Luna",
+      "especie": "Gato",
+      "edad": 1,
+      "vacunado": false
+    },
+    {
+      "nombre": "Emilio",
+      "especie": "Perro",
+      "edad": 1,
+      "vacunado": true,
+      "id": "TA3oTCWp1Os"
+    }
+  ],
+  "vehiculos": [
+    {
+      "id": "1",
+      "marca": "Chevrolet",
+      "modelo": "Sail",
+      "tipo": "Sedán",
+      "asegurado": true
+    },
+    {
+      "id": "2",
+      "marca": "Yamaha",
+      "modelo": "FZ25",
+      "tipo": "Motocicleta",
+      "asegurado": false
+    },
+    {
+      "marca": "sdada",
+      "modelo": "dadsad",
+      "tipo": "Sedán",
+      "asegurado": true,
+      "id": "5aJeJH5z-oo"
+    },
+    {
+      "marca": "dsfds",
+      "modelo": "dfsf",
+      "tipo": "Sedán",
+      "asegurado": true,
+      "id": "SGog17AXZks"
+    },
+    {
+      "marca": "fsdfsdf",
+      "modelo": "dsfdsfs",
+      "tipo": "Sedán",
+      "asegurado": true,
+      "id": "Elx2338yeSc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
