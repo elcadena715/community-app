@@ -17,7 +17,7 @@
       "hora": "00:12",
       "ubicacion": "Villa 18 - Manzana 5",
       "evidencia": "image-removebg-preview.png",
-      "estado": "Pendiente",
+      "estado": "Resuelto",
       "id": "I8IFLIxbGF4"
     },
     {
@@ -27,7 +27,7 @@
       "hora": "14:32",
       "ubicacion": "Manzana 4",
       "evidencia": "image-removebg-preview.png",
-      "estado": "Pendiente",
+      "estado": "Resuelto",
       "id": "ZFAKzDGnu_0"
     },
     {
@@ -77,7 +77,7 @@
       "hora": "00:45",
       "ubicacion": "Villa 8 - Manzana 8",
       "evidencia": "image-removebg-preview.png",
-      "estado": "Pendiente",
+      "estado": "Resuelto",
       "id": "4Uh0cH9J4Ng"
     },
     {
@@ -146,6 +146,17 @@
       "hora": "02:11",
       "publicar": true,
       "id": "MgX36Ei_Z0o"
+    },
+    {
+      "idReporte": "4Uh0cH9J4Ng",
+      "tituloReporte": "Dentro de mi casa no hay luz",
+      "estado": "Resuelto",
+      "autoridad": "Cnel",
+      "mensaje": "Cnel Arreglo",
+      "fecha": "2026-05-24",
+      "hora": "18:02",
+      "publicar": true,
+      "id": "6E03RxkDCjk"
     }
   ],
   "eventos": [
