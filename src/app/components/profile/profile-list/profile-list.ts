@@ -16,8 +16,8 @@ import { ProfileCrud } from '../profile-crud/profile-crud';
 export class ProfileList implements OnInit {
   residente = { nombre: 'David Sayay', iniciales: 'DS', ubicacion: 'Villa 4, Manzana 32' };
 
-  mascotas = signal<Mascota[]>([]);
-  vehiculos = signal<Vehiculo[]>([]);
+  mascotas = signal<any[]>([]);
+  vehiculos = signal<any[]>([]);
 
   isModalOpen = signal<boolean>(false);
   crudType: 'mascota' | 'vehiculo' = 'mascota';
@@ -40,8 +40,21 @@ export class ProfileList implements OnInit {
   }
 
   cargarDatosGrillas() {
-    this.perfilService.getMascotas().subscribe(data => this.mascotas.set(data));
-    this.perfilService.getVehiculos().subscribe(data => this.vehiculos.set(data));
+    this.perfilService.getMascotas().subscribe(data => {
+      const mascotasFormateadas = data.map(mascota => ({
+        ...mascota,
+        vacunado: mascota.vacunado ? 'Sí' : 'No'
+      }));
+      this.mascotas.set(mascotasFormateadas);
+    });
+
+    this.perfilService.getVehiculos().subscribe(data => {
+      const vehiculosFormateados = data.map(vehiculo => ({
+        ...vehiculo,
+        asegurado: vehiculo.asegurado ? 'Sí' : 'No'
+      }));
+      this.vehiculos.set(vehiculosFormateados);
+    });
   }
 
   openNew(tipo: 'mascota' | 'vehiculo') {
@@ -86,14 +99,13 @@ export class ProfileList implements OnInit {
       iconFooter: esMascota ? '🐾' : '🚗',
       footerText: 'Esta acción no se puede deshacer',
       reporte: {
-        id: item.id || 0,
-        col1Val: esMascota ? item.nombre : item.marca,
-        col2Val: esMascota ? item.especie : item.modelo,
-        col3Val: esMascota ? `${item.edad} años` : item.tipo
+        id: item.id || 'Nuevo',
+        titulo: esMascota 
+        ? `Tu mascota "${item.nombre}"` 
+        : `Tu vehículo marca ${item.marca}`,
+        fecha: new Date().toISOString().split('T')[0],
+        estado: 'Pendiente'
       },
-      col1Label: esMascota ? 'Nombre:' : 'Marca:',
-      col2Label: esMascota ? 'Especie:' : 'Modelo:',
-      col3Label: esMascota ? 'Edad:' : 'Tipo Auto:'
     };
 
     this.exitoConfig.set(config);

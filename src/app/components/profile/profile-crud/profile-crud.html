@@ -3,6 +3,7 @@
     <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
       
       <div class="p-4 pb-2 d-flex justify-content-between align-items-center">
+
         <h4 class="fw-bold m-0 text-dark">
           {{ data ? 'Editar ' : 'Nuevo ' }}{{ type === 'mascota' ? 'Mascota' : 'Vehículo' }}
         </h4>
@@ -14,58 +15,96 @@
           
           @if (type === 'mascota') {
             <div class="mb-3">
+
               <label class="form-label fw-medium text-dark">Nombre:</label>
               <input type="text" class="form-control" formControlName="nombre" [class.is-invalid]="isFieldInvalid('nombre')">
               <div class="invalid-feedback">
                 @if (hasError('nombre', 'required')) { <span>El nombre es obligatorio.</span> }
-                @else if (hasError('nombre', 'minlength')) { <span>Debe tener al menos 3 caracteres.</span> }
-                @else if (hasError('nombre', 'pattern')) { <span>Solo letras y espacios.</span> }
+                @if (hasError('nombre', 'minlength')) { <span>Debe tener al menos 3 caracteres.</span> }
+                @if (hasError('nombre', 'pattern')) { <span>Solo letras y espacios.</span> }
+
               </div>
             </div>
 
             <div class="mb-3">
+
               <label class="form-label fw-medium text-dark">Especie:</label>
               <select class="form-select" formControlName="especie" [class.is-invalid]="isFieldInvalid('especie')">
                 <option value="" disabled selected>Seleccione una especie</option>
                 @for(cat of categoriasMascota; track cat){ 
                   <option [value]="cat">{{cat}}</option> 
+
                 }
               </select>
+              <div class="invalid-feedback text-start">
+                <span>La especie es obligatoria.</span>
+
+              </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label fw-medium text-dark">Edad (Años):</label>
               <input type="number" class="form-control" formControlName="edad" [class.is-invalid]="isFieldInvalid('edad')">
+              <div class="invalid-feedback text-start">
+
+                @if (hasError('edad', 'required')) { <span>La edad es obligatoria.</span> }
+                @if (hasError('edad', 'min')) { <span>La edad no puede ser menor a 0.</span> }
+                @if (hasError('edad', 'max')) { <span>La edad no puede ser mayor a 30 años.</span> }
+              </div>
+
             </div>
 
             <div class="mb-4 form-check form-switch">
+
               <input class="form-check-input" type="checkbox" id="vacunado" formControlName="vacunado">
               <label class="form-check-label text-dark" for="vacunado">¿Cuenta con vacunas al día?</label>
             </div>
           }
 
           @if (type === 'vehiculo') {
+
             <div class="mb-3">
               <label class="form-label fw-medium text-dark">Marca:</label>
               <input type="text" class="form-control" formControlName="marca" [class.is-invalid]="isFieldInvalid('marca')">
+              <div class="invalid-feedback text-start">
+
+                @if (hasError('marca', 'required')) { <span>La marca es obligatoria.</span> }
+                @if (hasError('marca', 'minlength')) { <span>Debe tener al menos 3 caracteres.</span> }
+                 @if (hasError('marca', 'pattern')) { <span>Solo letras y espacios.</span> }
+                
+              </div>
+
             </div>
 
             <div class="mb-3">
               <label class="form-label fw-medium text-dark">Modelo (Año/Versión):</label>
               <input type="text" class="form-control" formControlName="modelo" [class.is-invalid]="isFieldInvalid('modelo')">
+               <div class="invalid-feedback text-start">
+
+                @if (hasError('modelo', 'required')) { <span>El modelo es obligatorio.</span> }
+                @if (hasError('modelo', 'minlength')) { <span>Debe tener al menos 3 caracteres.</span> }
+              </div>
             </div>
 
             <div class="mb-3">
-              <label class="form-label fw-medium text-dark">Tipo de Vehículo:</label>
+
+              <label class="form-label fw-medium text-dark">Tipo de vehículo:</label>
               <select class="form-select" formControlName="tipo" [class.is-invalid]="isFieldInvalid('tipo')">
                 <option value="" disabled selected>Seleccione el tipo</option>
                 @for(t of categoriasVehiculo; track t){ 
                   <option [value]="t">{{t}}</option> 
+
                 }
               </select>
+              <div class="invalid-feedback text-start">
+
+                <span>El tipo de clasificación es obligatorio.</span>
+              </div>
+
             </div>
 
             <div class="mb-4 form-check form-switch">
+              
               <input class="form-check-input" type="checkbox" id="asegurado" formControlName="asegurado">
               <label class="form-check-label text-dark" for="asegurado">¿Cuenta con seguro vehicular activo?</label>
             </div>

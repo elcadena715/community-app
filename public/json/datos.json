@@ -265,6 +265,14 @@
       "edad": 1,
       "vacunado": true,
       "id": "TA3oTCWp1Os"
+    },
+    {
+      "nombre": "Juan",
+      "especie": "Hámster",
+      "edad": 2,
+      "vacunado": true,
+      "id": "M6nWKS0_0hc",
+      "actualizado": true
     }
   ],
   "vehiculos": [

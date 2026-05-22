@@ -195,7 +195,7 @@ export class MarketCrud implements OnInit, AfterViewInit {
       titulo: tituloParam,            
       subtitulo: subtituloParam,      
       nombreItem: 'Producto',
-      reporte: { titulo: prodParam.name, fecha: 'Ahora', estado: prodParam.status },          
+      reporte: { id: prodParam.id || this.editingId || 'Nuevo', titulo: prodParam.name, fecha: new Date().toISOString().split('T')[0], estado: prodParam.status },          
       footerText: isConfirm ? 'Esta acción no se puede deshacer' : 'Gracias por colaborar en la comunidad.',
       iconFooter: isConfirm ? '⚠️' : '🤝',
       confirmText: isConfirm ? 'Sí, Eliminar' : 'Entendido',
