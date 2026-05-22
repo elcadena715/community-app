@@ -270,7 +270,7 @@
       "nombre": "Juan",
       "especie": "Hámster",
       "edad": 2,
-      "vacunado": true,
+      "vacunado": "Sí",
       "id": "M6nWKS0_0hc",
       "actualizado": true
     }
@@ -284,11 +284,12 @@
       "asegurado": true
     },
     {
-      "id": "2",
       "marca": "Yamaha",
       "modelo": "FZ25",
       "tipo": "Motocicleta",
-      "asegurado": false
+      "asegurado": "No",
+      "id": "2",
+      "actualizado": true
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
