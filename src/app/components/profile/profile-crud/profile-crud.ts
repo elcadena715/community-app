@@ -92,7 +92,7 @@ export class ProfileCrud implements OnInit {
     }
   }
 
-  // 🟢 PERSISTENCIA EN LOCALSTORAGE IGUALITA A TU MODULO DE INCIDENTES
+
   private mostrarFeedback(tituloParam: string, subtituloParam: string, itemData: any) {
     const esMascota = this.type === 'mascota';
     
@@ -116,10 +116,8 @@ export class ProfileCrud implements OnInit {
       col3Label: esMascota ? 'Edad:' : 'Tipo Auto:'
     };
 
-    // Almacenamos en el almacenamiento local antes de dar la orden de cierre asíncrono
     localStorage.setItem('ultimoExitoConfigProfile', JSON.stringify(config));
     
-    // Cerramos el CRUD mandando la orden de recarga al componente de la lista
     this.onCerrar.emit({ recargar: true });
   }
 }

@@ -36,17 +36,17 @@
     [todosLosSeguimientos]="seguimientos()"
     (close)="isViewOpen.set(false)">
   </app-reports-view>
-</div>
+  </div>
 
-<app-dialog
-  [isOpen]="isSuccessModalOpen()" 
-  [config]="exitoConfig()" 
-  (onClose)="cerrarModalExito()"
-  (onConfirm)="confirmarAccionDialog()">
-</app-dialog>
+  <app-dialog
+    [isOpen]="isSuccessModalOpen()" 
+    [config]="exitoConfig()" 
+    (onClose)="cerrarModalExito()"
+    (onConfirm)="confirmarAccionDialog()">
+  </app-dialog>
 
-@if(crudModal.isModalOpen() || isSuccessModalOpen()) {
-  <div class="modal-backdrop fade show"></div>
-}
+  @if(crudModal.isModalOpen() || isSuccessModalOpen()) {
+    <div class="modal-backdrop fade show"></div>
+  }
 
-<app-reporte-crud #crudModal (recargar)="cargarReportes($event)"></app-reporte-crud>
+  <app-reporte-crud #crudModal (recargar)="cargarReportes($event)"></app-reporte-crud>

@@ -19,12 +19,10 @@ export class ProfileList implements OnInit {
   mascotas = signal<Mascota[]>([]);
   vehiculos = signal<Vehiculo[]>([]);
 
-  // Control del Formulario Modal Hijo (Estilo reports-list)
   isModalOpen = signal<boolean>(false);
   crudType: 'mascota' | 'vehiculo' = 'mascota';
   selectedData: any = null;
 
-  // Control de Diálogos Genéricos (Igualito a Incidentes)
   isSuccessModalOpen = signal<boolean>(false);
   exitoConfig = signal<any>(null);
   itemAEliminar: { tipo: 'mascota' | 'vehiculo'; data: any } | null = null;
@@ -34,7 +32,6 @@ export class ProfileList implements OnInit {
   ngOnInit(): void {
     this.cargarDatosGrillas();
 
-    // 🟢 RESOLVEMOS LOCALSTORAGE IGUALITO A COMO LO HACES EN INCIDENTES:
     const configGuardada = localStorage.getItem('ultimoExitoConfigProfile');
     if (configGuardada) {
       this.exitoConfig.set(JSON.parse(configGuardada));
@@ -59,17 +56,14 @@ export class ProfileList implements OnInit {
     this.isModalOpen.set(true);
   }
 
-  // 🟢 CAPTURA EL EMIT DEL HIJO: Cierra el modal y refresca
   manejarCierreCrud(event: { recargar: boolean }) {
     this.isModalOpen.set(false);
     if (event.recargar) {
       this.cargarDatosGrillas();
       
-      // Recuperamos la configuración que el hijo guardó en el localStorage
       const configGuardada = localStorage.getItem('ultimoExitoConfigProfile');
       if (configGuardada) {
         this.exitoConfig.set(JSON.parse(configGuardada));
-        // Forzamos un microtask para pintar el diálogo después de limpiar el formulario
         setTimeout(() => {
           this.isSuccessModalOpen.set(true);
         }, 50);
@@ -81,7 +75,6 @@ export class ProfileList implements OnInit {
     this.itemAEliminar = { tipo, data: item };
     const esMascota = tipo === 'mascota';
 
-    // Configuración usando tus columnas reales del reporte
     const config = {
       titulo: esMascota ? '¿Eliminar Mascota?' : '¿Retirar Vehículo?',
       subtitulo: esMascota ? 'Esta acción removerá el registro del sistema de la urbanización.' : 'Se revocarán los permisos automáticos de acceso para este auto.',
@@ -107,7 +100,6 @@ export class ProfileList implements OnInit {
     this.isSuccessModalOpen.set(true);
   }
 
-  // 🟢 LIMPIEZA IGUALITA DEL LOCALSTORAGE AL DAR CLIC EN ENTENDIDO
   cerrarModalExito() {
     this.isSuccessModalOpen.set(false);
     localStorage.removeItem('mostrarExito');

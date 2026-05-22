@@ -281,27 +281,6 @@
       "modelo": "FZ25",
       "tipo": "Motocicleta",
       "asegurado": false
-    },
-    {
-      "marca": "sdada",
-      "modelo": "dadsad",
-      "tipo": "Sedán",
-      "asegurado": true,
-      "id": "5aJeJH5z-oo"
-    },
-    {
-      "marca": "dsfds",
-      "modelo": "dfsf",
-      "tipo": "Sedán",
-      "asegurado": true,
-      "id": "SGog17AXZks"
-    },
-    {
-      "marca": "fsdfsdf",
-      "modelo": "dsfdsfs",
-      "tipo": "Sedán",
-      "asegurado": true,
-      "id": "Elx2338yeSc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
