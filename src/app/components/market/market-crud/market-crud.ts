@@ -141,10 +141,10 @@ export class MarketCrud implements OnInit, AfterViewInit {
         this.mostrarFeedback('¡Cambios Guardados!', 'El producto ha sido modificado exitosamente.', data, 'SUCCESS');
       });
     } else {
-      this.marketService.addProductoPropio(data).subscribe(() => {
+      this.marketService.addProductoPropio(data).subscribe((nuevoProducto: any) => {
         this.cargarProductos(); 
         this.cerrarModal();
-        this.mostrarFeedback('¡Producto Publicado!', 'Tu artículo ya se encuentra disponible en la vitrina comunitaria.', data, 'SUCCESS');
+        this.mostrarFeedback('¡Producto Publicado!', 'Tu artículo ya se encuentra disponible en la vitrina comunitaria.', nuevoProducto, 'SUCCESS');
       });
     }
   }

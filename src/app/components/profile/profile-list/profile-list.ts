@@ -102,7 +102,7 @@ export class ProfileList implements OnInit {
         id: item.id || 'Nuevo',
         titulo: esMascota 
         ? `Tu mascota "${item.nombre}"` 
-        : `Tu vehículo marca ${item.marca}`,
+        : `Tu vehículo marca "${item.marca}"`,
         fecha: new Date().toISOString().split('T')[0],
         estado: 'Pendiente'
       },
