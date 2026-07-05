@@ -55,11 +55,13 @@
 
   <!-- Sección inferior de usuario -->
   <div class="dropdown">
-    <a href="#" class="d-flex align-items-center justify-content-between text-white text-decoration-none" id="dropdownUser1">
-    <div class="d-flex align-items-center">
-      <span>Cerrar Sesión</span>
-    </div>
-    <i class="fa-solid fa-right-from-bracket"></i>
+    <a href="#" 
+      class="d-flex align-items-center justify-content-between text-white text-decoration-none" 
+      id="dropdownUser1"
+      (click)="onCerrarSesion($event)"> <div class="d-flex align-items-center">
+        <span style="cursor: pointer;">Cerrar Sesión</span>
+      </div>
+      <i class="fa-solid fa-right-from-bracket"></i>
     </a>
   </div>
 

@@ -7,6 +7,7 @@ import { AppDialogComponent } from '../../shared/app-dialog/app-dialog';
 import { ReportsView } from '../reports-view/reports-view';
 import { ServFollowsJson } from '../../../services/follows/serv-follows-json';
 import { ReporteCrud } from '../reports-crud/reports-crud';
+import { ServCommunityApi } from '../../../services/serv-community-api';
 
 @Component({
   selector: 'app-reports-list',
@@ -27,7 +28,7 @@ export class ReportsList implements OnInit {
   private servFollows = inject(ServFollowsJson);
   reporteAEliminar: Reporte | null = null;
 
-  private miServicio = inject(ServReportesJson);
+  private miServicio = inject(ServCommunityApi);
 
   @ViewChild(ReporteCrud) crudModal!: ReporteCrud;
 
@@ -47,10 +48,16 @@ export class ReportsList implements OnInit {
     this.miServicio.getReportes().subscribe(data => {
       this.reportes.set(data);
       if (eventoHijo) {
+        console.log("Acción ejecutada:", eventoHijo.accion);
+        console.log("Objeto reporte recibido del hijo:", eventoHijo.reporte);
+
+        const reporteDesdeLista = data.find(r => r.id === eventoHijo.reporte?.id || r.id === eventoHijo.id);
+        const reporteFinal = eventoHijo.reporte || reporteDesdeLista || eventoHijo;
+
         if (eventoHijo.accion === 'EDIT') {
-          this.mostrarFeedback('¡Actualizado con Éxito!', 'La información ha sido actualizada.', eventoHijo.reporte, 'SUCCESS');
+          this.mostrarFeedback('¡Actualizado con Éxito!', 'La información ha sido actualizada.', reporteFinal, 'SUCCESS');
         } else if (eventoHijo.accion === 'CREATE') {
-          this.mostrarFeedback('¡Incidente Ingresado con Éxito!', 'Hemos recibido tu reporte correctamente.', eventoHijo.reporte, 'SUCCESS');
+          this.mostrarFeedback('¡Incidente Ingresado con Éxito!', 'Hemos recibido tu reporte correctamente.', reporteFinal, 'SUCCESS');
         }
       }
     });
@@ -83,7 +90,7 @@ export class ReportsList implements OnInit {
 
   confirmarAccionDialog() {
     if (this.reporteAEliminar) {
-      this.miServicio.deleteReporte(this.reporteAEliminar.id!).subscribe(() => {
+      this.miServicio.deactivateReport(this.reporteAEliminar.id!).subscribe(() => {
         this.reportes.update(list => list.filter(r => r.id !== this.reporteAEliminar?.id));
         this.cerrarModalExito();
         this.reporteAEliminar = null;
@@ -95,18 +102,37 @@ export class ReportsList implements OnInit {
     
     const isConfirm = type === 'CONFIRM';
 
-    const config = {
-      titulo: tituloParam,            
-      subtitulo: subtituloParam,      
-      nombreItem: 'Reporte',
-      reporte: reporteParam,          
-      footerText: isConfirm ? 'Esta acción no se puede deshacer' : 'Gracias por contribuir a la comunidad.',
-      iconFooter: isConfirm ? '⚠️' : '🤝',
-      confirmText: isConfirm ? 'Sí, Eliminar' : 'Entendido',
-      showCancel: isConfirm, 
-      btnClass: isConfirm ? 'btn-danger' : 'btn-secondary-custom',
-      cancelText: 'Volver'
+    const idDetectado = reporteParam?.id ?? reporteParam?.Id ?? reporteParam?.idReporte ?? '---';
+  
+    const tituloDetectado = reporteParam?.titulo ?? 
+                            reporteParam?.Titulo ?? 
+                            reporteParam?.tipoReporte ?? 
+                            reporteParam?.detalle ?? 
+                            'Sin detalle';
+
+    const fechaDetectada = reporteParam?.fecha ?? reporteParam?.Fecha ?? new Date().toLocaleDateString();
+    const estadoDetectado = reporteParam?.estado ?? reporteParam?.Estado ?? 'Pendiente';
+
+    const reporteFormateado = {
+      id: idDetectado,
+      titulo: tituloDetectado,
+      fecha: fechaDetectada,
+      estado: estadoDetectado
     };
+
+      const config = {
+        titulo: tituloParam,            
+        subtitulo: subtituloParam,      
+        nombreItem: 'Reporte',
+        reporte: reporteFormateado, 
+        footerText: isConfirm ? 'Esta acción no se puede deshacer' : 'Gracias por contribuir a la comunidad.',
+        iconFooter: isConfirm ? '⚠️' : '🤝',
+        confirmText: isConfirm ? 'Sí, Eliminar' : 'Entendido',
+        showCancel: isConfirm, 
+        btnClass: isConfirm ? 'btn-danger' : 'btn-secondary-custom',
+        cancelText: 'Volver'
+      };
+    
 
     if (!isConfirm) {
       localStorage.setItem('ultimoExitoConfig', JSON.stringify(config));

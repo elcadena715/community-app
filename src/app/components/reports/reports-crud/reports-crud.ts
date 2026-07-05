@@ -2,10 +2,11 @@ import { Component, ElementRef, EventEmitter, inject, OnInit, Output, signal, Vi
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Reporte } from '../../../models/reports';
-import { ServReportesJson } from '../../../services/reports/serv-reports-json';
+import { ServCommunityApi } from '../../../services/serv-community-api';
 
 
 declare const bootstrap: any;
+
 @Component({
   selector: 'app-reporte-crud',
   standalone: true,
@@ -27,7 +28,7 @@ export class ReporteCrud implements OnInit {
   editingId: number | null = null;
   categorias = ['Alumbrado', 'Mascota', 'Basura', 'Vandalismo', 'Ruido', 'Otros'];
 
-  private miServicio = inject(ServReportesJson);
+  private miServicio = inject(ServCommunityApi);
   private fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -55,6 +56,7 @@ export class ReporteCrud implements OnInit {
     this.evidenciaSeleccionada.set(null);
     this.formReporte.reset({ estado: 'Pendiente', tipoReporte: '', evidencia: null });
     this.isModalOpen.set(true); 
+    this.modalInstance.show();
   }
 
   onFileSelected(event: any) {
@@ -105,12 +107,16 @@ export class ReporteCrud implements OnInit {
 
     if (this.editingId) {
       this.miServicio.updateReporte({ ...data, id: this.editingId }).subscribe((res) => {
-        this.recargar.emit({ accion: 'EDIT', reporte: res });
+        const reporteActualizado = (res && typeof res === 'object' && Object.keys(res).length > 0) 
+          ? res 
+          : { ...data, id: this.editingId };
+        this.recargar.emit({ accion: 'EDIT', reporte: reporteActualizado });
         this.closeModal();
       });
     } else {
       this.miServicio.addReporte(data).subscribe((newReporte) => {
-        this.recargar.emit({ accion: 'CREATE', reporte: newReporte });
+        const reporteCreado = newReporte || data;
+        this.recargar.emit({ accion: 'CREATE', reporte: reporteCreado });
         this.closeModal();
       });
     }

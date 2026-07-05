@@ -28,7 +28,7 @@ export class Dashboard implements OnInit {
   };
 
   columnasConfig = [
-    { key: 'tipoReporte', label: 'Tipo de Reporte' },
+    { key: 'tipoReporte', label: 'Tipo de Incidente' },
     { key: 'titulo', label: 'Detalle del incidente' },
     { key: 'fecha', label: 'Fecha' },
     { key: 'estado', label: 'Estado' }

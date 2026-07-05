@@ -1,0 +1,66 @@
+<div class="login-wrapper d-flex justify-content-center align-items-center vh-100">
+  <div class="login-container p-4 text-center">
+    
+    <div class="mb-4">
+      <img src="https://i.postimg.cc/9fJnRYzJ/logo-1.png" alt="Logo Palmas Reales" class="logo-img" />
+    </div>
+
+    <h2 class="login-title fw-bold mb-1">Bienvenido Vecino</h2>
+    <p class="login-subtitle mb-4">Ingresa tus credenciales para continuar</p>
+
+    @if (errorMessage()) {
+      <div class="alert alert-danger py-2 small mb-3 text-start" role="alert">
+        ⚠️ {{ errorMessage() }}
+      </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="text-start">
+      
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Correo Electrónico:</label>
+        <input 
+          type="email" 
+          formControlName="email" 
+          class="form-control-custom" 
+          [ngClass]="{'is-invalid': isFieldInvalid('email')}"
+          placeholder="ejemplo@correo.com"
+        />
+        @if (isFieldInvalid('email')) {
+          <div class="invalid-message">Por favor, ingresa un correo electrónico válido.</div>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Contraseña:</label>
+        <input 
+          type="password" 
+          formControlName="password" 
+          class="form-control-custom" 
+          [ngClass]="{'is-invalid': isFieldInvalid('password')}"
+          placeholder="••••••••"
+        />
+        @if (isFieldInvalid('password')) {
+          <div class="invalid-message">La contraseña es obligatoria para ingresar.</div>
+        }
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn-submit-custom mb-5" 
+        [disabled]="form.invalid || isLoading()"
+      >
+        @if (isLoading()) {
+          <span class="spinner-border spinner-border-sm me-2"></span>
+        }
+        {{ isLoading() ? 'Validando...' : 'Ingresar' }}
+      </button>
+
+    </form>
+
+    <div class="mt-4">
+      <p class="footer-text mb-0">¿Eres nuevo propietario?</p>
+      <a href="mailto:administracion@palmasreales.com" class="footer-link">Contactar administración</a>
+    </div>
+
+  </div>
+</div>

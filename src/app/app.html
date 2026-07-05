@@ -1,11 +1,11 @@
-<div class="d-flex w-100">
+<div class="d-flex w-100 vh-100 overflow-hidden">
   
-  <!-- Componente Sidebar -->
-  <app-sidebar></app-sidebar>
+  <!-- El Sidebar solo se renderiza si hay sesión activa -->
+  @if (authService.currentUser()) {
+    <app-sidebar></app-sidebar>
+  }
   
-
-  
-  <div class="flex-grow-1 bg-light p-4 overflow-auto vh-100">
+  <div class="flex-grow-1 h-100 overflow-auto">
     <router-outlet></router-outlet>
   </div>
   

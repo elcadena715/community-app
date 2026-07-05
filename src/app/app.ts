@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from "./components/shared/sidebar/sidebar";
+import { ServAuth } from './services/serv-auth';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,5 @@ import { Sidebar } from "./components/shared/sidebar/sidebar";
 })
 export class App {
   protected readonly title = signal('community-app');
+  public authService = inject(ServAuth);
 }

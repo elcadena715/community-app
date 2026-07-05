@@ -1,44 +1,45 @@
-<div class="container-fluid mt-4 px-4">
-  <div class="row align-items-center mb-4">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 text-center">
-      <h2 class="fw-bold m-0">Incidentes</h2>
+<div class="bg-light min-vh-100 w-100 py-4">
+  <div class="container-fluid px-4">
+    
+    <div class="row align-items-center mb-4">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 text-center">
+        <h2 class="fw-bold m-0">Incidentes</h2>
+      </div>
+      <div class="col-md-4 text-end">
+        <button class="btn btn-new btn-outline-dark fw-bold" (click)="openNew()">
+          + Nuevo Incidente
+        </button>
+      </div>
     </div>
-    <div class="col-md-4 text-end">
-      <button class="btn btn-new btn-outline-dark fw-bold" (click)="openNew()">
-        + Nuevo Incidente
-      </button>
-    </div>
-  </div>
 
-  <h4 class="mb-3">Mis Incidentes</h4>
+    <h4 class="mb-3">Mis Incidentes</h4>
 
-  <app-table-reporte-crud
-    [data]="reportes()"
-    [columnas]="[
-      { key: 'tipoReporte', label: 'Tipo de Reporte' },
-      { key: 'titulo', label: 'Detalle del Incidente' },
-      { key: 'fecha', label: 'Fecha' },
-      { key: 'hora', label: 'Hora' },
-      { key: 'ubicacion', label: 'Ubicacion' },
-      { key: 'evidencia', label: 'Evidencia' },
-      { key: 'estado', label: 'Estado' }
-    ]"
-    (editar)="openEdit($event)"
-    (eliminar)="delete($event)"
-    [mostrarVerEstado]="true"
-    (verEstado)="verHistorial($event)">
-  </app-table-reporte-crud>
+    <app-table-reporte-crud
+      [data]="reportes()"
+      [columnas]="[
+        { key: 'tipoReporte', label: 'Tipo de Reporte' },
+        { key: 'titulo', label: 'Detalle del Incidente' },
+        { key: 'fecha', label: 'Fecha' },
+        { key: 'hora', label: 'Hora' },
+        { key: 'ubicacion', label: 'Ubicacion' },
+        { key: 'evidencia', label: 'Evidencia' },
+        { key: 'estado', label: 'Estado' }
+      ]"
+      (editar)="openEdit($event)"
+      (eliminar)="delete($event)"
+      [mostrarVerEstado]="true"
+      (verEstado)="verHistorial($event)">
+    </app-table-reporte-crud>
 
-  <app-reports-view 
-    [isOpen]="isViewOpen()" 
-    [reporte]="selectedReport()" 
-    [todosLosSeguimientos]="seguimientos()"
-    (close)="isViewOpen.set(false)">
-  </app-reports-view>
-  </div>
+    <app-reports-view 
+      [isOpen]="isViewOpen()" 
+      [reporte]="selectedReport()" 
+      [todosLosSeguimientos]="seguimientos()"
+      (close)="isViewOpen.set(false)">
+    </app-reports-view>
 
-  <app-dialog
+  </div> <app-dialog
     [isOpen]="isSuccessModalOpen()" 
     [config]="exitoConfig()" 
     (onClose)="cerrarModalExito()"
@@ -50,3 +51,4 @@
   }
 
   <app-reporte-crud #crudModal (recargar)="cargarReportes($event)"></app-reporte-crud>
+</div>
